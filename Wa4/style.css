@@ -1,0 +1,59 @@
+body {
+    background-color: #e0afa0;
+}
+
+/* dark green, redish brown, light green, light peach, peach */
+/* 36382E, 8e4a49, aac0af, e0afa0, e0a890 */
+
+nav ul {
+    background-color: #8e4a49;
+    padding: 10px;
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    list-style-type: none;
+    justify-content: center;
+    gap: 30px;
+}
+
+h1 {
+    font-family: "hagrid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 31.25px;
+}
+
+h2 {
+    font-family: "hagrid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+}
+
+h3 {
+    font-family: "hagrid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+
+p {
+    font-family: "hagrid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+
+small {
+    font-family: "hagrid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+}
+
+
+footer {
+    background-color: #aac0af;
+    text-align: center;
+    padding: 20px;
+}

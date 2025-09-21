@@ -42,7 +42,7 @@ button {
 }
 
 .nav-menu {
-    display: none;
+    display: flex;
     top: 10px;
     font-size: x-large;
     align-items: center;
@@ -110,16 +110,13 @@ nav>ul>li:hover>ul {
 @media (max-width: 768px) {
 
     /* sizing for mobile */
-    .nav-brand {
-        font-size: x-large;
-    }
-
     .nav-toggle {
         display: block;
         /* show the toggle button on mobile */
     }
 
     .nav-menu {
+        display: none;
         width: 100%;
         margin-top: 40px;
         /* lower the menu below toggle button */

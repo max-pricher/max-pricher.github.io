@@ -13,12 +13,12 @@ function showNav() {
         details.classList.add('show');
         expandNav.ariaLabel = "Collapse nav";
         info = true;
-        alert("You have expanded the menu");
+        expandNav.style.transform = "rotate(90deg)";
     }
     else {
         details.classList.remove('show');
         expandNav.ariaLabel = "Expand nav";
         info = false;
-        alert("You have collapsed the menu");
+        expandNav.style.transform = "rotate(0deg)";
     }
 }

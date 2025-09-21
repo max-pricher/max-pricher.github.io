@@ -1,0 +1,123 @@
+.nav-brand {
+    font-size: xx-large;
+    text-align: center;
+}
+
+body {
+    background-color: #DBFCFF;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+button:hover {
+    text-decoration: underline;
+}
+
+button {
+    color: #ffffff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+}
+
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #FF8552;
+    border-radius: 0 0 20px 20px;
+    padding: 10px 0;
+    min-width: 150px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.nav-menu {
+    display: flex;
+    /* this made it so they were in a row instead of a line  */
+    top: 10px;
+    font-size: x-large;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+    /* this centers the menu items */
+    gap: 20px;
+    /* space between menu items */
+    list-style-type: none;
+    /* removes the bullet points */
+    padding: 0;
+    /* removes default padding */
+    background: #FF8552;
+    height: 70px;
+    width: 600px;
+    border-radius: 20px;
+}
+
+.nav-toggle {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 25%;
+    background-color: grey;
+}
+
+/* for hamburger menu */
+.nav-toggle span {
+
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    margin: 5px;
+}
+
+
+
+/* from medium */
+
+/* don't forget to set the relative position for the parent element of the sub menu */
+nav>ul>li {
+    position: relative;
+}
+
+/* sub menu is hidden by default */
+nav>ul ul {
+    position: absolute;
+    display: none;
+}
+
+/* make it visible on hover */
+nav>ul>li:hover>ul {
+    display: block;
+}
+
+@media (max-width: 768px) {
+
+    /* sizing for mobile */
+    .nav-brand {
+        font-size: x-large;
+    }
+
+    .nav-toggle {
+        display: block;
+        /* show the toggle button on mobile */
+    }
+
+    .nav-menu {
+        display: none;
+        width: 100%;
+        /* hide the menu by default on mobile */
+    }
+}

@@ -42,8 +42,7 @@ button {
 }
 
 .nav-menu {
-    display: flex;
-    /* this made it so they were in a row instead of a line  */
+    display: none;
     top: 10px;
     font-size: x-large;
     align-items: center;
@@ -61,6 +60,11 @@ button {
     width: 600px;
     border-radius: 20px;
 }
+
+.nav-menu.show {
+    display: flex;
+}
+
 
 .nav-toggle {
     display: none;
@@ -116,8 +120,8 @@ nav>ul>li:hover>ul {
     }
 
     .nav-menu {
-        display: none;
         width: 100%;
-        /* hide the menu by default on mobile */
+        margin-top: 40px;
+        /* lower the menu below toggle button */
     }
 }

@@ -10,14 +10,14 @@ expandNav.addEventListener('click', showNav); /* when button is clicked, showNav
 
 function showNav() {
     if (info == false) {
-        details.style.display = "flex";
-        expandNav.ariaLabel = "Collapse menu";
+        details.classList.toggle('show');
+        expandNav.ariaLabel = "Collapse nav";
         info = true;
         alert("You have expanded the menu");
     }
     else {
-        details.style.display = "none";
-        expandNav.ariaLabel = "Expand menu";
+        details.classList.toggle('show');
+        expandNav.ariaLabel = "Expand nav";
         info = false;
         alert("You have collapsed the menu");
     }

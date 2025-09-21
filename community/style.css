@@ -107,6 +107,10 @@ nav>ul>li:hover>ul {
     display: block;
 }
 
+nav>ul>li:focus-within>ul {
+    display: block;
+}
+
 @media (max-width: 768px) {
 
     /* sizing for mobile */

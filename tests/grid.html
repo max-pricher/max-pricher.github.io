@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid test</title>
+    <style>
+        .parent-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            width: 315px;
+            grid-template-areas:
+                "overall-nav1 course-nav1 main1"
+                "overall-nav2 course-nav2 main2"
+            ;
+
+        }
+
+        .box {
+            border: 2px solid black;
+            height: 100px;
+            width: 100px;
+        }
+
+        #one {
+            background-color: red;
+            grid-area:
+                main2;
+        }
+
+        #two {
+            background-color: blue;
+        }
+
+        #three {
+            background-color: green;
+        }
+
+        #four {
+            background-color: yellow;
+        }
+
+        #five {
+            background-color: aqua;
+        }
+
+        #six {
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent-grid">
+        <div class="box" id="one"></div>
+        <div class="box" id="two"></div>
+        <div class="box" id="three"></div>
+        <div class="box" id="four"></div>
+        <div class="box" id="five"></div>
+        <div class="box" id="six"></div>
+    </div>
+
+</body>
+
+</html>

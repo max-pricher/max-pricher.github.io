@@ -1,0 +1,25 @@
+/* Current Flexbox CSS */
+.gallery-container {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "nav    sidebar"
+        "main   sidebar"
+    ;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.photo-card {
+    height: 200px;
+    background-color: #d13232;
+}
+
+.featured {
+    grid-column: span 2;
+    height: 300px;
+}

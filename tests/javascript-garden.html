@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button>
+        Click me
+    </button>
+
+    <input type="text" id="input">
+
+    <div class="demo-box" style="width: 200px; height: 200px; background: lightblue;">
+        Hover over me
+    </div>
+
+</body>
+
+<script>
+    // This will select ALL buttons 
+    const button = document.querySelector("button");
+
+    const input = document.getElementById('input');
+
+    const box = document.querySelector('.demo-box');
+
+
+    function logEventDetails(event) {
+        console.log(`Event Type: ${event.type}`);
+        console.log(`Event element: ${event.target}`);
+        console.log(`Target tag: ${event.target.tagName}`);
+        console.log(`Target ID: ${event.target.id}`);
+        console.log(`Target classes: ${event.target.className}`);
+        console.log(`Current time: ${new Date().toLocaleTimeString()}`);
+
+        console.log('---\n \n \n');
+    }
+
+    button.addEventListener('click', logEventDetails);
+
+    // input is when you click any key inside the box
+    input.addEventListener('input', logEventDetails);
+    // focus is when you click into the box
+    input.addEventListener('focus', logEventDetails);
+    // blur is when you click out of the box
+    input.addEventListener('blur', logEventDetails);
+    // mouseover is when you hover over the box
+    box.addEventListener('mouseover', logEventDetails);
+    // mouseout is when you leave the box
+    box.addEventListener('mouseout', logEventDetails);
+
+</script>
+
+</html>

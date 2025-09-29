@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="nav-brand">Community Hub</div>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="community.html">Home</a></li>
+                <!-- found this from a medium article by Bogdan Bendziukov -->
+                <li><button>Resources</button>
+                    <ul class="submenu">
+                        <li><a href="community.html">Identity</a></li>
+                        <li><a href="community.html">Crisis</a></li>
+                        <li><a href="community.html">Sex Ed</a></li>
+                    </ul>
+                </li>
+                <li><a href="community.html">Events</a></li>
+                <li><a href="community.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+
+        <!-- setting up filters for the blogs-->
+        <nav class="Blog-Nav">
+            <button data-filter="All">All</button>
+            <button data-filter="Male">Male</button>
+            <button data-filter="Female">Female</button>
+            <button data-filter="Non-Binary">Non-Binary</button>
+        </nav>
+
+        <button id="theme-toggle" aria-label="Toggle dark and light themes">
+            Change Theme
+        </button>
+    </header>
+
+
+    <main>
+        <!-- All blogs within this div-->
+        <div class="Blog-Grid">
+            <div class="Blog1" data-category="Non-Binary">
+                <h2>Max's Blog</h2>
+                <p>This is my blog page. I will post updates and articles here.</p>
+            </div>
+
+            <div class="Blog2" data-category="Female">
+                <h2>Ericas's Blog</h2>
+                <p>This is my blog page. I will post updates and articles here.</p>
+            </div>
+
+            <div class="Blog3" data-category="Female">
+                <h2>Amys's Blog</h2>
+                <p>This is my blog page. I will post updates and articles here.</p>
+            </div>
+
+            <div class="Blog4" data-category="Male">
+                <h2>Bobs's Blog</h2>
+                <p>This is my blog page. I will post updates and articles here.</p>
+            </div>
+
+
+
+        </div>
+    </main>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

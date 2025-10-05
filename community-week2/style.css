@@ -159,51 +159,51 @@ nav .nav-menu li button {
 
 /* consolidated way of assigning grid areas, */
 .home {
-    grid-area: Home;
+    grid-area: home;
 }
 
 .home-photo {
-    grid-area: Home-Photo;
+    grid-area: home-photo;
 }
 
 .identity {
-    grid-area: Identity;
+    grid-area: identity;
 }
 
 .identity-photo {
-    grid-area: Identity-Photo;
+    grid-area: identity-photo;
 }
 
 .crisis {
-    grid-area: Crisis;
+    grid-area: crisis;
 }
 
 .crisis-photo {
-    grid-area: Crisis-Photo;
+    grid-area: crisis-photo;
 }
 
 .sex-ed {
-    grid-area: Sex-Ed;
+    grid-area: sex-ed;
 }
 
 .sex-ed-photo {
-    grid-area: Sex-Ed-Photo;
+    grid-area: sex-ed-photo;
 }
 
 .events {
-    grid-area: Events;
+    grid-area: events;
 }
 
 .events-photo {
-    grid-area: Events-Photo;
+    grid-area: events-photo;
 }
 
 .contact {
-    grid-area: Contact;
+    grid-area: contact;
 }
 
 .contact-photo {
-    grid-area: Contact-Photo;
+    grid-area: contact-photo;
 }
 
 
@@ -380,12 +380,12 @@ nav .nav-menu li button {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         /* odd number for mid point and symetry */
-        grid-template-areas: "Home Home Home Home-Photo Home-Photo"
-            "Identity-Photo Identity-Photo Identity-Photo Identity Identity"
-            "Crisis Crisis Crisis Crisis-Photo Crisis-Photo"
-            "Sex-Ed-Photo Sex-Ed-Photo Sex-Ed-Photo Sex-Ed Sex-Ed"
-            "Events Events Events Events-Photo Events-Photo"
-            "Contact-Photo Contact-Photo Contact-Photo Contact Contact";
+        grid-template-areas: "home home home home-photo home-photo"
+            "identity-photo identity-photo identity-photo identity identity"
+            "crisis crisis crisis crisis-photo crisis-photo"
+            "sex-ed-photo sex-ed-photo sex-ed-photo sex-ed sex-ed"
+            "events events events events-photo events-photo"
+            "contact-photo contact-photo contact-photo contact contact";
         justify-items: center;
         gap: 20px;
         padding: 20px;

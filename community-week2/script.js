@@ -90,8 +90,25 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('lastSaveTime', Date.now());
 });
 
-// Load saved theme on page load
+// Load data on page load
 window.addEventListener('load', function () {
+    // intitialize clear data button, MOVED INSIDE LOAD TO AVOID 'NULL' ERROR
+    const dataButton = document.getElementById('clear-data');
+    if (dataButton) { // Safety check to ensure button exists
+        dataButton.addEventListener('click', () => {
+            clearAllUserData();
+        });
+    }
+
+    // initialize don't store data button - MOVED INSIDE LOAD TO AVOID 'NULL' ERROR
+    const dontStoreDataButton = document.getElementById('dont-store-data');
+    if (dontStoreDataButton) { // Safety check to ensure button exists
+        dontStoreDataButton.addEventListener('click', () => {
+            clearAllUserData();
+            localStorage.setItem('dataConsent', 'false');
+            localStorage.setItem('lastSaveTime', Date.now()); // Set a timestamp to make future expiration checks consistent
+        });
+    }
     // If user has opted out of data storage, do not check for any saved data
     if (localStorage.getItem('dataConsent') === 'false') {
         return;

@@ -90,45 +90,6 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('lastSaveTime', Date.now());
 });
 
-// Load data on page load
-window.addEventListener('load', function () {
-    // intitialize clear data button, MOVED INSIDE LOAD TO AVOID 'NULL' ERROR
-    const dataButton = document.getElementById('clear-data');
-    if (dataButton) { // Safety check to ensure button exists
-        dataButton.addEventListener('click', () => {
-            clearAllUserData();
-        });
-    }
-
-    // initialize don't store data button - MOVED INSIDE LOAD TO AVOID 'NULL' ERROR
-    const dontStoreDataButton = document.getElementById('dont-store-data');
-    if (dontStoreDataButton) { // Safety check to ensure button exists
-        dontStoreDataButton.addEventListener('click', () => {
-            clearAllUserData();
-            localStorage.setItem('dataConsent', 'false');
-            localStorage.setItem('lastSaveTime', Date.now()); // Set a timestamp to make future expiration checks consistent
-        });
-    }
-    // If user has opted out of data storage, do not check for any saved data
-    if (localStorage.getItem('dataConsent') === 'false') {
-        return;
-    }
-
-    // Check if data has expired
-    const dataExpired = checkDataExpiration();
-    if (dataExpired) {
-        // If data was expired and cleared, we don't need to apply a theme here.
-        // The default theme (light-mode) will be applied.
-        return;
-    }
-
-    // when window loads, function will run, get user theme from local storage
-    //get theme from userTheme, if none default to light
-    const savedTheme = localStorage.getItem('userTheme') || 'light';
-    // set body class to saved theme
-    document.body.className = savedTheme;
-});
-
 // erase data button
 const dataButton = document.getElementById('clear-data');
 
@@ -164,3 +125,50 @@ function checkDataExpiration() {
     }
     return false; // Return false if data is still valid
 }
+
+
+
+// --- INITIALIZATION ---
+window.addEventListener('load', function () {
+    // 1. Load saved theme
+    applySavedTheme();
+
+    // 2. BLOG FILTER LOGIC - MOVED INSIDE LOAD TO ENSURE BUTTONS EXIST
+    const filterButtons = document.querySelectorAll('.blog-nav button');
+    const blogPosts = document.querySelectorAll('.blog-grid > div');
+
+    function filterBlogs(category) {
+        blogPosts.forEach(post => {
+            if (category === 'All' || post.dataset.category === category) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const filterValue = event.target.dataset.filter;
+            filterBlogs(filterValue);
+        });
+    });
+
+    // 3. Erase Data Button 
+    const dataButton = document.getElementById('clear-data');
+    if (dataButton) {
+        dataButton.addEventListener('click', () => {
+            clearAllUserData();
+        });
+    }
+
+    // 4. Don't Store Data Button 
+    const dontStoreDataButton = document.getElementById('dont-store-data');
+    if (dontStoreDataButton) {
+        dontStoreDataButton.addEventListener('click', () => {
+            clearAllUserData();
+            localStorage.setItem('dataConsent', 'false');
+            localStorage.setItem('lastSaveTime', Date.now());
+        });
+    }
+});

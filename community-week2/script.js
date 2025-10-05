@@ -1,3 +1,4 @@
+// Define constants for the expiration time (4 days in milliseconds)
 const EXPIRATION_TIME = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
 // array of all possible data storage keys
 const STORAGE_KEYS = [
@@ -13,105 +14,7 @@ function clearAllUserData() {
     });
 }
 
-
-let info = false; /* track visibility state as a bool/let*/
-
-const expandNav = document.querySelector('.nav-toggle'); /* select nav toggle button*/
-const details = document.querySelector('.nav-menu'); /* select nav menu section*/
-
-const label = document.querySelector('.aria-label'); /* select aria label*/
-
-
-expandNav.addEventListener('click', showNav); /* when button is clicked, showNav function is called*/
-
-function showNav() {
-    if (info == false) {
-        details.classList.add('show');
-        expandNav.ariaLabel = "Collapse nav";
-        info = true;
-        expandNav.style.transform = "rotate(90deg)";
-    }
-    else {
-        details.classList.remove('show');
-        expandNav.ariaLabel = "Expand nav";
-        info = false;
-        expandNav.style.transform = "rotate(0deg)";
-    }
-}
-
-// filter button
-// Get all filter buttons and blog posts
-const filterButtons = document.querySelectorAll('.Blog-Nav button');
-// go inside blog-grid add select all divs, assign to blogPosts
-const blogPosts = document.querySelectorAll('.Blog-Grid > div');
-
-// Add click event to each button
-filterButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        //get filter from button selected
-        const filterValue = event.target.dataset.filter;
-        // apply filter to function
-        filterBlogs(filterValue);
-    });
-});
-
-
-function filterBlogs(category) {
-    // go through all blogs
-    blogPosts.forEach(post => {
-        // if categorgy matches or is all, show it
-        if (category === 'All' || post.dataset.category === category) {
-            post.style.display = 'block';
-        } else {
-            post.style.display = 'none';
-        }
-    });
-}
-
-// theme toggle button
-const themeButton = document.getElementById('theme-toggle');
-const body = document.body;
-
-themeButton.addEventListener('click', () => {
-    body.classList.toggle('dark-mode'); // toggle the theme
-
-    if (localStorage.getItem('dataConsent') === 'false') {
-        // If user has opted out of data storage, don't save theme preference
-        return;
-    }
-
-    // figure out what theme is active and save to local storage
-    if (body.classList.contains('dark-mode')) {
-        // save mode as userTheme in local storage.
-        localStorage.setItem('userTheme', 'dark-mode');
-    } else {
-        localStorage.setItem('userTheme', 'light-mode');
-    }
-    localStorage.setItem('lastSaveTime', Date.now());
-});
-
-// erase data button
-const dataButton = document.getElementById('clear-data');
-
-dataButton.addEventListener('click', () => {
-    clearAllUserData()
-}
-);
-
-// dont store my data button
-const dontStoreDataButton = document.getElementById('dont-store-data');
-
-dontStoreDataButton.addEventListener('click', () => {
-    // clear previous data
-    clearAllUserData()
-
-    // set website to not save
-    localStorage.setItem('dataConsent', 'false');
-    localStorage.setItem('lastSaveTime', Date.now());
-}
-);
-
-
+// Function to check and clear expired data
 function checkDataExpiration() {
     // get last save time
     const lastSaveTime = localStorage.getItem('lastSaveTime');
@@ -126,35 +29,92 @@ function checkDataExpiration() {
     return false; // Return false if data is still valid
 }
 
+// nav toggle
+let info = false;
 
+const expandNav = document.querySelector('.nav-toggle');
+const details = document.querySelector('.nav-menu');
+
+// Safety check before adding listener
+if (expandNav) {
+    expandNav.addEventListener('click', showNav);
+}
+
+function showNav() {
+    if (info == false) {
+        details.classList.add('show');
+        expandNav.ariaLabel = "Collapse nav";
+        info = true;
+        expandNav.style.transform = "rotate(90deg)";
+    } else {
+        details.classList.remove('show');
+        expandNav.ariaLabel = "Expand nav";
+        info = false;
+        expandNav.style.transform = "rotate(0deg)";
+    }
+}
+
+// --- blog filters ---
+const filterButtons = document.querySelectorAll('.blog-nav button');
+const blogPosts = document.querySelectorAll('.blog-grid > div');
+
+// Attach listeners to filter buttons
+filterButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        const filterValue = event.target.dataset.filter;
+        filterBlogs(filterValue);
+    });
+});
+
+function filterBlogs(category) {
+    blogPosts.forEach(post => {
+        if (category === 'All' || post.dataset.category === category) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
+
+// theme toggle
+const themeButton = document.getElementById('theme-toggle');
+
+if (themeButton) {
+    themeButton.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+
+        if (localStorage.getItem('dataConsent') === 'false') {
+            return;
+        }
+
+        const currentTheme = document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
+        localStorage.setItem('userTheme', currentTheme);
+        localStorage.setItem('lastSaveTime', Date.now());
+    });
+}
 
 // --- INITIALIZATION ---
 window.addEventListener('load', function () {
+
+    // check if any data is expired
+    const dataExpired = checkDataExpiration();
+    if (dataExpired) {
+        return;
+    }
     // 1. Load saved theme
-    applySavedTheme();
+    function applySavedTheme() {
+        if (localStorage.getItem('dataConsent') === 'false') {
+            return;
+        }
 
-    // 2. BLOG FILTER LOGIC - MOVED INSIDE LOAD TO ENSURE BUTTONS EXIST
-    const filterButtons = document.querySelectorAll('.blog-nav button');
-    const blogPosts = document.querySelectorAll('.blog-grid > div');
 
-    function filterBlogs(category) {
-        blogPosts.forEach(post => {
-            if (category === 'All' || post.dataset.category === category) {
-                post.style.display = 'block';
-            } else {
-                post.style.display = 'none';
-            }
-        });
+        const savedTheme = localStorage.getItem('userTheme') || 'light';
+        document.body.className = savedTheme;
     }
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const filterValue = event.target.dataset.filter;
-            filterBlogs(filterValue);
-        });
-    });
+    applySavedTheme();
 
-    // 3. Erase Data Button 
+    // 2. Erase Data Button - MOVED INSIDE LOAD TO AVOID 'NULL' ERROR
     const dataButton = document.getElementById('clear-data');
     if (dataButton) {
         dataButton.addEventListener('click', () => {
@@ -162,7 +122,7 @@ window.addEventListener('load', function () {
         });
     }
 
-    // 4. Don't Store Data Button 
+    // 3. Don't Store Data Button - MOVED INSIDE LOAD TO AVOID 'NULL' ERROR
     const dontStoreDataButton = document.getElementById('dont-store-data');
     if (dontStoreDataButton) {
         dontStoreDataButton.addEventListener('click', () => {

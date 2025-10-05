@@ -147,68 +147,68 @@ nav .nav-menu li button {
 }
 
 /* consolidated all the text styling for the grid items, uses less lines and keeps code cleaner*/
-.Home,
-.Identity,
-.Crisis,
-.Sex-Ed,
-.Events,
-.Contact {
+.home,
+.identity,
+.crisis,
+.sex-ed,
+.events,
+.contact {
     text-align: center;
     font-size: x-large;
 }
 
 /* consolidated way of assigning grid areas, */
-.Home {
+.home {
     grid-area: Home;
 }
 
-.Home-Photo {
+.home-photo {
     grid-area: Home-Photo;
 }
 
-.Identity {
+.identity {
     grid-area: Identity;
 }
 
-.Identity-Photo {
+.identity-photo {
     grid-area: Identity-Photo;
 }
 
-.Crisis {
+.crisis {
     grid-area: Crisis;
 }
 
-.Crisis-Photo {
+.crisis-photo {
     grid-area: Crisis-Photo;
 }
 
-.Sex-Ed {
+.sex-ed {
     grid-area: Sex-Ed;
 }
 
-.Sex-Ed-Photo {
+.sex-ed-photo {
     grid-area: Sex-Ed-Photo;
 }
 
-.Events {
+.events {
     grid-area: Events;
 }
 
-.Events-Photo {
+.events-photo {
     grid-area: Events-Photo;
 }
 
-.Contact {
+.contact {
     grid-area: Contact;
 }
 
-.Contact-Photo {
+.contact-photo {
     grid-area: Contact-Photo;
 }
 
 
 /* blog stuff */
-.Blog-Grid {
+.blog-grid {
     display: grid;
     /* Default to 3 columns for desktop */
     grid-template-columns: 1fr 1fr 1fr;
@@ -222,12 +222,12 @@ nav .nav-menu li button {
     padding: 20px;
 }
 
-.Blog h2 {
+.blog h2 {
     padding-bottom: 10px;
     border-bottom: 2px solid var(--secondary-color);
 }
 
-.Blog {
+.blog {
     text-align: center;
     font-size: x-large;
     border: 2px solid black;
@@ -238,7 +238,7 @@ nav .nav-menu li button {
     margin-right: none;
 }
 
-.Blog-Nav {
+.blog-nav {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -355,7 +355,7 @@ nav .nav-menu li button {
         display: flex;
     }
 
-    .Blog-Nav {
+    .blog-nav {
         width: 500px;
     }
 }
@@ -372,7 +372,7 @@ nav .nav-menu li button {
         gap: 20px;
     }
 
-    .Blog-Nav {
+    .blog-nav {
         width: 600px;
     }
 
@@ -395,7 +395,7 @@ nav .nav-menu li button {
 /* container queries */
 
 @container blog-card-context (max-width: 700px) {
-    .Blog {
+    .blog {
         /* When the blog container gets narrow (e.g., in a sidebar or narrow column), 
            left-align the text for better readability. */
         text-align: left;

@@ -12,33 +12,35 @@
     <header>
         <nav class="main-nav">
             <div class="nav-brand">Community Hub</div>
+
             <button class="nav-toggle" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+
             <ul class="nav-menu">
                 <li><a href="community.html">Home</a></li>
                 <!-- found this from a medium article by Bogdan Bendziukov -->
-                <li><button>Resources</button>
+                <li><button class="nav-button">Resources</button>
                     <ul class="submenu">
-                        <li><a href="community.html">Identity</a></li>
-                        <li><a href="community.html">Crisis</a></li>
-                        <li><a href="community.html">Sex Ed</a></li>
+                        <li><a href="community.html#Identity">Identity</a></li>
+                        <li><a href="community.html#Crisis">Crisis</a></li>
+                        <li><a href="community.html#SexEd">Sex Ed</a></li>
                     </ul>
                 </li>
-                <li><a href="community.html">Events</a></li>
-                <li><a href="community.html">Contact</a></li>
+                <li><a href="community.html#Events">Events</a></li>
+                <li><a href="community.html#Contact">Contact</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
         </nav>
 
         <!-- setting up filters for the blogs-->
         <nav class="Blog-Nav">
-            <button data-filter="All">All</button>
-            <button data-filter="Male">Male</button>
-            <button data-filter="Female">Female</button>
-            <button data-filter="Non-Binary">Non-Binary</button>
+            <button data-filter="All" class="blog-button">All</button>
+            <button data-filter="Male" class="blog-button">Male</button>
+            <button data-filter="Female" class="blog-button">Female</button>
+            <button data-filter="Non-Binary" class="blog-button">Non-Binary</button>
         </nav>
 
         <button id="theme-toggle" aria-label="Toggle dark and light themes">
@@ -50,40 +52,70 @@
     <main>
         <!-- All blogs within this div-->
         <div class="Blog-Grid">
-            <div class="Blog1" data-category="Non-Binary">
+            <div id="Blog1" class="Blog" data-category="Non-Binary">
                 <h2>Max's Blog</h2>
-                <p>This is my blog page. I will post updates and articles here.</p>
+                <p>The existential crisis of breakfast pastries often leads me to question the very fabric of reality.
+                    If a waffle is merely a grid of batter, is the syrup not a metaphor for societal expectations? I
+                    believe that the deeper you delve into the physics of a toasted carbohydrate, the closer you get to
+                    true, nonsensical enlightenment. The key is the density. Always focus on the density.</p>
             </div>
 
-            <div class="Blog2" data-category="Female">
+            <div id="Blog2" class="Blog" data-category="Female">
                 <h2>Ericas's Blog</h2>
-                <p>This is my blog page. I will post updates and articles here.</p>
+                <p>I have concluded, after three weeks of meticulous observation, that dust bunnies are organized into
+                    complex, highly political factions. They negotiate treaties based on static cling levels. Never
+                    underestimate their capacity for complex taxation methods. They are always plotting, always
+                    watching.</p>
             </div>
 
-            <div class="Blog3" data-category="Female">
+            <div id="Blog3" class="Blog" data-category="Female">
                 <h2>Amys's Blog</h2>
-                <p>This is my blog page. I will post updates and articles here.</p>
+                <p>The cirrus formation observed last Tuesday at 4:00 PM CST lacked narrative tension. The shapes were
+                    too predictable, too conforming to accepted standards of meteorological drama. When observing
+                    cumulus congestus, one must demand more chaos, a more profound dedication to the abstract. I spent
+                    approximately seven hours documenting the subtle shifts in vapor pressure, only to be disappointed
+                    by its commitment to normalcy. I theorize that the adjacent high-pressure system was actively
+                    censoring its artistic expression. We must rally for greater freedom in atmospheric composition,
+                    demanding bolder shapes and less adherence to gravity's boring mandates. This is not just weather;
+                    this is an ignored canvas. The sky is an artist and its best work is yet to come, assuming, of
+                    course, that we overcome the tyranny of the troposphere.</p>
             </div>
 
-            <div class="Blog4" data-category="Male">
+            <div id="Blog4" class="Blog" data-category="Male">
                 <h2>Bobs's Blog</h2>
                 <p>This is my blog page. I will post updates and articles here.</p>
             </div>
 
-            <div class="Blog5" data-category="Female">
+            <div id="Blog5" class="Blog" data-category="Female">
                 <h2>Tian's Blog</h2>
-                <p>This is my blog page. I will post updates and articles here.</p>
+                <p>I feel strongly that hands have been marginalized in the world of cozy accessories. Feet get all the
+                    praise. But consider the tactical advantage of a fuzzy sock on a cold finger—it is unmatched. You
+                    achieve peak, non-specific comfort and also gain the ability to subtly dust furniture without
+                    effort. It is an evolutionary step we must embrace immediately.</p>
             </div>
 
-            <div class="Blog6" data-category="Non-Binary">
+            <div id="Blog6" class="Blog" data-category="Non-Binary">
                 <h2>Maeryn's Blog</h2>
-                <p>This is my blog page. I will post updates and articles here.</p>
+                <p>The green light is not permission; it is a suggestion, often delivered with unwarranted enthusiasm.
+                    The yellow light, however, is a profound statement on time and human anxiety—it is the universe
+                    asking if you truly understand velocity. We explore the philosophical implications of the brake
+                    pedal, which is merely a physical manifestation of temporal regret. Never trust the crosswalk
+                    signal; it has a dark, chaotic sense of humor. The true art of driving is understanding that all
+                    signals are interpretive poems, not commands. Treat every stop sign as a sonnet about slowing down
+                    and reflecting on your tire pressure. In conclusion, the most important lesson is to never drive
+                    while attempting to solve quadratic equations in your head. It affects the turning radius.</p>
             </div>
-
-
 
         </div>
     </main>
+    <footer>
+        <p>&copy; 2025 Trevor's Project</p>
+        <a class="footer-button" id="back-to-top" aria-label="Back to top" href="#top">Back to Top</a>
+        <button class="footer-button" id="clear-data" aria-label="Remove my data">Remove my data</button>
+        <button class="footer-button" id="dont-store-data" aria-label="Don't store my data">Don't store my
+            data</button>
+
+    </footer>
     <script src="script.js"></script>
 
 </body>

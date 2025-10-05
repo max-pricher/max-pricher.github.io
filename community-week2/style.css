@@ -1,19 +1,40 @@
+:root {
+    --primary-color: #DBFCFF;
+    /* Your light background blue */
+    --primary-dark-mode: #121212;
+    --secondary-color: #FF8552;
+    /* Your current accent orange */
+
+    --text-color-light: #ffffff;
+    --utility-grey: grey;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode {
+    background-color: var(--primary-dark-mode);
+    color: var(--text-color-light);
+}
+
+
+/* nav stuff */
 .nav-brand {
     font-size: xx-large;
     text-align: center;
 }
 
-body {
-    background-color: #DBFCFF;
-}
-
-body.dark-mode {
-    background-color: #121212;
-    color: white;
-}
-
 nav a {
-    color: #ffffff;
+    color: var(--text-color-light);
     text-decoration: none;
 }
 
@@ -21,212 +42,37 @@ nav a:hover {
     text-decoration: underline;
 }
 
-.main-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    /* odd number for mid point and symetry */
-    grid-template-areas:
-        "Home Home Home Home-Photo Home-Photo"
-        "Identity-Photo Identity-Photo Identity-Photo Identity Identity"
-        "Crisis Crisis Crisis Crisis-Photo Crisis-Photo"
-        "Sex-Ed-Photo Sex-Ed-Photo Sex-Ed-Photo Sex-Ed Sex-Ed"
-        "Events Events Events Events-Photo Events-Photo"
-        "Contact-Photo Contact-Photo Contact-Photo Contact Contact";
-    justify-items: center;
-    gap: 20px;
-    padding: 20px;
-}
-
-.Home {
-    grid-area: Home;
-    text-align: center;
-    font-size: x-large;
-}
-
-.Home-Photo {
-    grid-area: Home-Photo;
-}
-
-.Identity {
-    grid-area: Identity;
-    text-align: center;
-    font-size: x-large;
-}
-
-.Identity-Photo {
-    grid-area: Identity-Photo;
-}
-
-.Crisis {
-    grid-area: Crisis;
-    text-align: center;
-    font-size: x-large;
-}
-
-.Crisis-Photo {
-    grid-area: Crisis-Photo;
-}
-
-.Sex-Ed {
-    grid-area: Sex-Ed;
-    text-align: center;
-    font-size: x-large;
-}
-
-.Sex-Ed-Photo {
-    grid-area: Sex-Ed-Photo;
-}
-
-.Events {
-    grid-area: Events;
-    text-align: center;
-    font-size: x-large;
-}
-
-.Events-Photo {
-    grid-area: Events-Photo;
-}
-
-.Contact {
-    grid-area: Contact;
-    text-align: center;
-    font-size: x-large;
-}
-
-.Contact-Photo {
-    grid-area: Contact-Photo;
-}
-
-.Blog-Grid {
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    /* odd number for mid point and symetry */
-    grid-template-areas:
-        "Post1 Post1 Post1"
-        "Post2 Post2 Post2"
-        "Post3 Post3 Post3"
-        "Post4 Post4 Post4"
-        "Post5 Post5 Post5"
-        "Post6 Post6 Post6";
-    justify-items: center;
-    gap: 20px;
-    padding: 20px;
-}
-
-.Blog {
-    text-align: center;
-    font-size: x-large;
-    border: 2px solid black;
-    padding: 10px;
-    background-color: white;
-    border-radius: 20px;
-}
-
-.Blog-Nav {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: xx-large;
-    border: 2px solid black;
-    padding: 10px;
-    background-color: #FF8552;
-    border-radius: 20px;
-    border-radius: 20px;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-}
-
-.Blog1 {
-    grid-area: Post1;
-}
-
-.Blog2 {
-    grid-area: Post2;
-}
-
-.Blog3 {
-    grid-area: Post3;
-}
-
-.Blog4 {
-    grid-area: Post4;
-}
-
-
-
-button:hover {
-    text-decoration: underline;
-}
-
-button {
-    color: #ffffff;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: large;
-}
-
-#theme-toggle {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: 50px;
-    width: 120px;
-    border-radius: 25%;
-    background-color: grey;
-    color: white;
-    font-size: medium;
-    border: none;
-    cursor: pointer;
-}
-
-.submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #FF8552;
-    border-radius: 0 0 20px 20px;
-    padding: 10px 0;
-    min-width: 150px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
 .nav-menu {
+    background: var(--secondary-color);
+    /* removes the bullet points */
+    list-style-type: none;
     display: flex;
     top: 10px;
-    font-size: x-large;
+
+    /* replaced our  font-size: 3vw; so it works on all screen sizes */
+    font-size: clamp(1rem, 3vw, 2rem);
+
+
     align-items: center;
     margin: auto;
-    list-style-type: none;
-    /* removes the bullet points */
     justify-content: center;
+
     padding: 0;
     gap: 20px;
-    width: 600px;
-    /* removes default padding */
-    background: #FF8552;
+    max-width: 3000px;
     height: 70px;
     border-radius: 20px;
 }
 
-.nav-menu.show {
-    display: grid;
-}
-
-
 .nav-toggle {
+    background-color: var(--utility-grey);
     display: none;
     position: absolute;
-    top: 10px;
+    top: 50px;
     right: 10px;
     height: 50px;
     width: 50px;
     border-radius: 25%;
-    background-color: grey;
 }
 
 /* for hamburger menu */
@@ -235,20 +81,42 @@ button {
     display: block;
     width: 25px;
     height: 3px;
-    background-color: #ffffff;
+    background: var(--text-color-light);
     margin: 5px;
 }
 
+.nav-button {
+    color: var(--text-color-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: xx-large;
+}
 
+.nav-button:hover {
+    text-decoration: underline;
+}
 
-/* from medium */
+/* from medium, html/css only submenu */
+
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--secondary-color);
+    border-radius: 0 0 20px 20px;
+    padding: 10px;
+    width: 90%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
 
 /* don't forget to set the relative position for the parent element of the sub menu */
 nav>ul>li {
     position: relative;
 }
 
-/* sub menu is hidden by default */
+/* sub menu is hidden by default, list within list */
 nav>ul ul {
     position: absolute;
     display: none;
@@ -257,13 +125,218 @@ nav>ul ul {
 /* make it visible on hover */
 nav>ul>li:hover>ul {
     display: block;
+    list-style-type: none;
+    padding-left: 10px;
 }
 
+/* make it visible on focus, for screen readers and mobile */
 nav>ul>li:focus-within>ul {
     display: block;
 }
 
-@media (max-width: 768px) {
+/* fix the weird font size issue with buttons in nav */
+nav .nav-menu li button {
+    font-size: inherit;
+}
+
+/* grid stuff */
+.main-grid {
+    justify-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* consolidated all the text styling for the grid items, uses less lines and keeps code cleaner*/
+.Home,
+.Identity,
+.Crisis,
+.Sex-Ed,
+.Events,
+.Contact {
+    text-align: center;
+    font-size: x-large;
+}
+
+/* consolidated way of assigning grid areas, */
+.Home {
+    grid-area: Home;
+}
+
+.Home-Photo {
+    grid-area: Home-Photo;
+}
+
+.Identity {
+    grid-area: Identity;
+}
+
+.Identity-Photo {
+    grid-area: Identity-Photo;
+}
+
+.Crisis {
+    grid-area: Crisis;
+}
+
+.Crisis-Photo {
+    grid-area: Crisis-Photo;
+}
+
+.Sex-Ed {
+    grid-area: Sex-Ed;
+}
+
+.Sex-Ed-Photo {
+    grid-area: Sex-Ed-Photo;
+}
+
+.Events {
+    grid-area: Events;
+}
+
+.Events-Photo {
+    grid-area: Events-Photo;
+}
+
+.Contact {
+    grid-area: Contact;
+}
+
+.Contact-Photo {
+    grid-area: Contact-Photo;
+}
+
+
+/* blog stuff */
+.Blog-Grid {
+    display: grid;
+    /* Default to 3 columns for desktop */
+    grid-template-columns: 1fr 1fr 1fr;
+
+    /* define container */
+    container-type: inline-size;
+    container-name: blog-card-context;
+
+    justify-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.Blog h2 {
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.Blog {
+    text-align: center;
+    font-size: x-large;
+    border: 2px solid black;
+    padding: 10px;
+    background: var(--text-color-light);
+    color: black;
+    border-radius: 20px;
+    margin-right: none;
+}
+
+.Blog-Nav {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: xx-large;
+    border: 2px solid black;
+    background-color: #FF8552;
+
+    padding: 10px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+
+.blog-button {
+    color: var(--text-color-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    margin: 0 10px;
+}
+
+/* footer stuff */
+.footer-button:hover {
+    text-decoration: underline;
+}
+
+.footer-button {
+
+    color: var(--text-color-light);
+    text-decoration: none;
+    background-color: var(--utility-grey);
+    border-radius: 25%;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    padding: 20px;
+}
+
+#theme-toggle {
+    color: var(--text-color-light);
+    background-color: var(--utility-grey);
+    border: none;
+    cursor: pointer;
+    padding: 25px;
+    border-radius: 25%;
+    font-size: medium;
+
+    position: absolute;
+    top: 50px;
+    left: 10px;
+}
+
+
+/* media queries */
+/* for mobile */
+@media (max-width: 450px) {
+
+    /* sizing for mobile */
+
+    #theme-toggle {
+        padding: 15px;
+    }
+
+    .nav-toggle {
+        display: block;
+        /* show the toggle button on mobile */
+    }
+
+    .nav-menu {
+        display: none;
+        width: 90%;
+        margin-top: 70px;
+        /* lower the menu below toggle button */
+    }
+
+    .nav-menu.show {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+    }
+
+    .main-grid {
+        display: flex-column;
+        justify-content: center;
+    }
+
+
+}
+
+/* for tablets */
+@media (450px <=width <=1200px) {
+    .main-grid {
+        display: flex-column;
+        justify-content: center;
+    }
 
     /* sizing for mobile */
     .nav-toggle {
@@ -276,5 +349,56 @@ nav>ul>li:focus-within>ul {
         width: 100%;
         margin-top: 40px;
         /* lower the menu below toggle button */
+    }
+
+    .nav-menu.show {
+        display: flex;
+    }
+
+    .Blog-Nav {
+        width: 500px;
+    }
+}
+
+/* for computer screens */
+@media (width >=1200px) {
+
+
+    .nav-menu {
+        /* dont need a nav-menu.show for desktop as it should always be shown */
+        display: grid;
+        grid-template-columns: repeat(5, auto);
+        width: 800px;
+        gap: 20px;
+    }
+
+    .Blog-Nav {
+        width: 600px;
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        /* odd number for mid point and symetry */
+        grid-template-areas: "Home Home Home Home-Photo Home-Photo"
+            "Identity-Photo Identity-Photo Identity-Photo Identity Identity"
+            "Crisis Crisis Crisis Crisis-Photo Crisis-Photo"
+            "Sex-Ed-Photo Sex-Ed-Photo Sex-Ed-Photo Sex-Ed Sex-Ed"
+            "Events Events Events Events-Photo Events-Photo"
+            "Contact-Photo Contact-Photo Contact-Photo Contact Contact";
+        justify-items: center;
+        gap: 20px;
+        padding: 20px;
+    }
+}
+
+/* container queries */
+
+@container blog-card-context (max-width: 700px) {
+    .Blog {
+        /* When the blog container gets narrow (e.g., in a sidebar or narrow column), 
+           left-align the text for better readability. */
+        text-align: left;
+        font-size: large;
     }
 }

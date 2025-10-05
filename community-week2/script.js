@@ -1,3 +1,19 @@
+const EXPIRATION_TIME = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
+// array of all possible data storage keys
+const STORAGE_KEYS = [
+    'userTheme',
+    'language',
+    'lastSaveTime',
+    'dataConsent',
+];
+
+function clearAllUserData() {
+    STORAGE_KEYS.forEach(key => {
+        localStorage.removeItem(key);
+    });
+}
+
+
 let info = false; /* track visibility state as a bool/let*/
 
 const expandNav = document.querySelector('.nav-toggle'); /* select nav toggle button*/
@@ -26,12 +42,13 @@ function showNav() {
 // filter button
 // Get all filter buttons and blog posts
 const filterButtons = document.querySelectorAll('.Blog-Nav button');
+// go inside blog-grid add select all divs, assign to blogPosts
 const blogPosts = document.querySelectorAll('.Blog-Grid > div');
 
 // Add click event to each button
 filterButtons.forEach(button => {
     button.addEventListener('click', (event) => {
-        //get filter
+        //get filter from button selected
         const filterValue = event.target.dataset.filter;
         // apply filter to function
         filterBlogs(filterValue);
@@ -56,5 +73,77 @@ const themeButton = document.getElementById('theme-toggle');
 const body = document.body;
 
 themeButton.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
+    body.classList.toggle('dark-mode'); // toggle the theme
+
+    if (localStorage.getItem('dataConsent') === 'false') {
+        // If user has opted out of data storage, don't save theme preference
+        return;
+    }
+
+    // figure out what theme is active and save to local storage
+    if (body.classList.contains('dark-mode')) {
+        // save mode as userTheme in local storage.
+        localStorage.setItem('userTheme', 'dark-mode');
+    } else {
+        localStorage.setItem('userTheme', 'light-mode');
+    }
+    localStorage.setItem('lastSaveTime', Date.now());
 });
+
+// Load saved theme on page load
+window.addEventListener('load', function () {
+    // If user has opted out of data storage, do not check for any saved data
+    if (localStorage.getItem('dataConsent') === 'false') {
+        return;
+    }
+
+    // Check if data has expired
+    const dataExpired = checkDataExpiration();
+    if (dataExpired) {
+        // If data was expired and cleared, we don't need to apply a theme here.
+        // The default theme (light-mode) will be applied.
+        return;
+    }
+
+    // when window loads, function will run, get user theme from local storage
+    //get theme from userTheme, if none default to light
+    const savedTheme = localStorage.getItem('userTheme') || 'light';
+    // set body class to saved theme
+    document.body.className = savedTheme;
+});
+
+// erase data button
+const dataButton = document.getElementById('clear-data');
+
+dataButton.addEventListener('click', () => {
+    clearAllUserData()
+}
+);
+
+// dont store my data button
+const dontStoreDataButton = document.getElementById('dont-store-data');
+
+dontStoreDataButton.addEventListener('click', () => {
+    // clear previous data
+    clearAllUserData()
+
+    // set website to not save
+    localStorage.setItem('dataConsent', 'false');
+    localStorage.setItem('lastSaveTime', Date.now());
+}
+);
+
+
+function checkDataExpiration() {
+    // get last save time
+    const lastSaveTime = localStorage.getItem('lastSaveTime');
+    // get current time
+    const currentTime = Date.now();
+
+    // Check if there was a last save and if the data is older than the expiration limit
+    if (lastSaveTime && (currentTime - lastSaveTime > EXPIRATION_TIME)) {
+        clearAllUserData();
+        return true; // Return true if data was cleared
+    }
+    return false; // Return false if data is still valid
+}

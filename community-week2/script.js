@@ -9,6 +9,7 @@ const STORAGE_KEYS = [
 ];
 
 function clearAllUserData() {
+    // for every item in array, remove from localStorage
     STORAGE_KEYS.forEach(key => {
         localStorage.removeItem(key);
     });
@@ -18,16 +19,18 @@ function clearAllUserData() {
 function checkDataExpiration() {
     const lastSaveTime = localStorage.getItem('lastSaveTime');
     const currentTime = Date.now();
-
+    // if past expiration, clear all data and return true
     if (lastSaveTime && (currentTime - lastSaveTime > EXPIRATION_TIME)) {
         clearAllUserData();
         return true;
     }
+    // if data isnt expired, return false
     return false;
 }
 
 // Function to apply the saved theme
 function applySavedTheme() {
+    // if we arent saving data, return
     if (localStorage.getItem('dataConsent') === 'false') {
         return;
     }
@@ -42,7 +45,7 @@ function applySavedTheme() {
     document.body.className = savedTheme;
 }
 
-// --- NAVIGATION TOGGLE LOGIC (Works fine globally) ---
+// --nav toggle--
 let info = false;
 const expandNav = document.querySelector('.nav-toggle');
 const details = document.querySelector('.nav-menu');
@@ -65,32 +68,29 @@ function showNav() {
     }
 }
 
-// --- BLOG FILTER LOGIC (Wrapped in check to prevent errors on community.html) ---
+// --- blog filter ---
 const filterButtons = document.querySelectorAll('.blog-nav button');
 const blogPosts = document.querySelectorAll('.blog-grid > div');
 
-if (filterButtons.length > 0 && blogPosts.length > 0) {
-    // Attach listeners to filter buttons
-    filterButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const filterValue = event.target.dataset.filter;
-            filterBlogs(filterValue);
-        });
+// Attach listeners to filter buttons
+filterButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        const filterValue = event.target.dataset.filter;
+        filterBlogs(filterValue);
     });
+});
 
-    function filterBlogs(category) {
-        blogPosts.forEach(post => {
-            if (category === 'All' || post.dataset.category === category) {
-                post.style.display = 'block';
-            } else {
-                post.style.display = 'none';
-            }
-        });
-    }
+function filterBlogs(category) {
+    blogPosts.forEach(post => {
+        if (category === 'All' || post.dataset.category === category) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
 }
 
-
-// --- THEME TOGGLE LOGIC (Works fine globally) ---
+// --- theme toggle ---
 const themeButton = document.getElementById('theme-toggle');
 
 if (themeButton) {
@@ -107,42 +107,42 @@ if (themeButton) {
     });
 }
 
+
+// --- data buttons DEFINITIONS ---
+const clearButton = document.getElementById('clear-data');
+if (clearButton) {
+    clearButton.addEventListener('click', () => {
+        console.log("Clearing all user data.");
+        clearAllUserData();
+    });
+}
+
+const dontStoreDataButton = document.getElementById('dont-store-data');
+if (dontStoreDataButton) {
+    dontStoreDataButton.addEventListener('click', () => {
+        // Clear data and set the opt-out flag
+        clearAllUserData();
+        // set flag to false
+        console.log("Opted out of data storage.");
+        localStorage.setItem('dataConsent', 'false');
+        localStorage.setItem('lastSaveTime', Date.now());
+    });
+}
+
+const startStoringButton = document.getElementById('start-storing-data');
+if (startStoringButton) { // This conditional check will now succeed.
+    startStoringButton.addEventListener('click', () => {
+        // change flag to true
+        localStorage.setItem('dataConsent', 'true');
+        localStorage.setItem('lastSaveTime', Date.now());
+        console.log("Opt-out reversed.");
+    });
+}
+
+
 window.addEventListener('load', function () {
     // 1. Load saved theme and check expiration
     applySavedTheme();
 
-    // --- BUTTON DEFINITIONS ---
-    const clearButton = document.getElementById('clear-data');
-    const dontStoreDataButton = document.getElementById('dont-store-data');
-    const startStoringButton = document.getElementById('start-storing-data'); // Variable is now defined here.
 
-    // 2. Erase Data Button (Clears all data)
-    if (clearButton) {
-        clearButton.addEventListener('click', () => {
-            console.log("Clearing all user data.");
-            clearAllUserData();
-        });
-    }
-
-    // 3. Don't Store Data Button (Sets opt-out flag)
-    if (dontStoreDataButton) {
-        dontStoreDataButton.addEventListener('click', () => {
-            // Clear data and set the opt-out flag
-            clearAllUserData();
-            // set flag to false
-            console.log("Opted out of data storage.");
-            localStorage.setItem('dataConsent', 'false');
-            localStorage.setItem('lastSaveTime', Date.now());
-        });
-    }
-
-    // 4. Start Storing Data Button (Opt-in reversal)
-    if (startStoringButton) { // This conditional check will now succeed.
-        startStoringButton.addEventListener('click', () => {
-            // change flag to true
-            localStorage.setItem('dataConsent', 'true');
-            localStorage.setItem('lastSaveTime', Date.now());
-            console.log("Opt-out reversed.");
-        });
-    }
 });

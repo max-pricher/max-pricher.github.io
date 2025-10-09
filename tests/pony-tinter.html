@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pony Tinter</title>
+</head>
+
+<body>
+    <img src="https://pethelpful.com/.image/w_3840,q_auto:good,c_limit/MTc0NDAxODQxOTkwMjE1MDE2/pony-care-and-grooming.jpg"
+        alt="A beautiful pony" id="pony-tint" aria-label="click me to tiny the pony">
+</body>
+
+<script>
+    // get random number between 1-360, round to a whole number
+
+    const img = document.getElementById('pony-tint');
+    img.addEventListener('click', () => {
+        randomNumber = Math.floor(Math.random() * 360);
+        img.style.filter = `hue-rotate(${randomNumber}deg)`;
+    });
+
+    img.addEventListener('keydown', (event) => {
+        if (event.key === "ArrowUp" || event.key === " ") {
+            img.style.transform = "scale(-1)";
+        }
+    });
+</script>
+
+</html>

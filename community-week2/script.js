@@ -45,6 +45,17 @@ function applySavedTheme() {
     document.body.className = savedTheme;
 }
 
+// resource button submenu (only toggles aria rn)
+const resourceButton = document.getElementById('Nav-Button');
+if (resourceButton) {
+    // when resource is clicked, it can only be expanded (not collapsed) so set to true
+    resourceButton.addEventListener('click', () => {
+        resourceButton.setAttribute('aria-expanded', true);
+    });
+
+    // doesnt work with focus, probably need to change how the submenu functions
+}
+
 // --nav toggle--
 let info = false;
 const expandNav = document.querySelector('.nav-toggle');

@@ -1,10 +1,7 @@
 :root {
     --primary-color: #DBFCFF;
-    /* Your light background blue */
     --primary-dark-mode: #121212;
     --secondary-color: #CC3D00;
-    /* Your current accent orange */
-
     --text-color-light: #ffffff;
     --text-color-dark: #000000;
     --utility-color: #157145;

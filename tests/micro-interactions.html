@@ -13,6 +13,13 @@
 
             --primary-utility-color: #7E9181;
             --secondary-utility-color: #C7CEDB;
+
+            --roulette-0: #FF5733;
+            --roulette-1: #33FF57;
+            --roulette-2: #3357FF;
+            --roulette-3: #F333FF;
+            --roulette-4: #33FFF5;
+            --roulette-5: #F3FF33;
         }
 
         body {
@@ -29,7 +36,8 @@
         }
 
         .button-container {
-            margin-top: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             height: 100px;
@@ -119,6 +127,30 @@
             left: 25%;
         }
 
+        #button-roulette-0,
+        #button-roulette-1,
+        #button-roulette-2,
+        #button-roulette-final {
+            margin: auto;
+            width: 150px;
+            height: 75px;
+            background-color: var(--primary-utility-color);
+            font-size: medium;
+            color: black;
+            border: none;
+            margin: 10px;
+            box-shadow: -10px 10px 5px rgba(0, 0, 0, 0.443);
+            transition-duration: 200ms;
+            transition-property: all;
+        }
+
+        #button-roulette-0:hover,
+        #button-roulette-1:hover,
+        #button-roulette-2:hover,
+        #button-roulette-final:hover {
+            scale: 1.2;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             .moving-box {
                 transition-duration: 0s !important;
@@ -144,6 +176,16 @@
 
         <div class="button-container">
             <button id='moving-button' class="pos-0" aria-label="click for a surprise">click me?</button>
+        </div>
+
+        <div class="button-container">
+            <button id="button-roulette-0" aria-label="button roulette 0"></button>
+
+            <button id="button-roulette-1" aria-label="button roulette 1"></button>
+
+            <button id="button-roulette-2" aria-label="button roulette 2"></button>
+
+            <button id="button-roulette-final" aria-label="button roulette final">Button Roulette Final</button>
         </div>
 
     </main>
@@ -185,7 +227,7 @@
             movingButton.classList.remove('pos-0', 'pos-1', 'pos-2', 'pos-3');
 
             position = (position + 1) % 4;
-            movingButton.classList.add('pos-' + position);
+            movingButton.classList.add(`pos-${position}`);
         });
 
         // secret button press (click me? with tab)
@@ -195,7 +237,8 @@
 
         // second secret button
         box.addEventListener('click', () => {
-            const colorR = Math.floor(Math.random() * 256); const colorG = Math.floor(Math.random() * 256);
+            const colorR = Math.floor(Math.random() * 256);
+            const colorG = Math.floor(Math.random() * 256);
             const colorB = Math.floor(Math.random() * 256);
             /* got template literals from substack */
             /* have to use this weird format, using rgb template kind of like a function*/
@@ -203,6 +246,61 @@
 
             /* should also use this as alternative to + with concat strings */
         });
+
+        // roulette script
+        function randomNum(element, max) {
+            const random = Math.floor(Math.random() * max);
+            element.style.backgroundColor = `var(--roulette-${random})`;
+        }
+
+        const roulette0 = document.getElementById('button-roulette-0');
+        const roulette1 = document.getElementById('button-roulette-1');
+        const roulette2 = document.getElementById('button-roulette-2');
+        const rouletteFinal = document.getElementById('button-roulette-final');
+
+        roulette0.addEventListener('click', () => {
+            randomNum(roulette0, 6);
+        });
+        roulette1.addEventListener('click', () => {
+            randomNum(roulette1, 6);
+        });
+        roulette2.addEventListener('click', () => {
+            randomNum(roulette2, 6);
+        });
+
+        rouletteFinal.addEventListener('click', () => {
+            /* used stack overflow to figure out how to get current background color */
+            const colors = [
+                getComputedStyle(roulette0).backgroundColor,
+                getComputedStyle(roulette1).backgroundColor,
+                getComputedStyle(roulette2).backgroundColor
+            ];
+
+            // Check if all three buttons have the same color
+            if (colors[0] === colors[1] && colors[1] === colors[2]) {
+                rouletteFinal.style.backgroundColor = 'green';
+                setTimeout(() => {
+                    rouletteFinal.style.backgroundColor = 'var(--primary-utility-color)';
+                }, 1000);
+                randomNum(roulette0, 6);
+                randomNum(roulette1, 6);
+                randomNum(roulette2, 6);
+            } else {
+                rouletteFinal.style.backgroundColor = 'red';
+                setTimeout(() => {
+                    rouletteFinal.style.backgroundColor = 'var(--primary-utility-color)';
+                }, 1000);
+            }
+        });
+
+        window.addEventListener('load', () => {
+            // set initial colors
+            randomNum(roulette0, 6);
+            randomNum(roulette1, 6);
+            randomNum(roulette2, 6);
+        });
+
+
 
     </script>
 

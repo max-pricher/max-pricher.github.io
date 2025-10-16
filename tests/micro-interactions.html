@@ -81,10 +81,11 @@
             box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.443);
         }
 
+        /* shadows dont work when box is down */
         .moving-box.down {
             /* move box to 20px down of viewport + box width */
-            top: calc(100vw - 220px);
-            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.443);
+            top: calc(100vh - 220px);
+            box-shadow: 10px -10px 5px rgba(0, 0, 0, 0.443);
         }
 
 

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro interactions</title>
+
+    <style>
+        :root {
+            --primary-color: #A0AAB2;
+            --secondary-color: #94849B;
+
+            --primary-utility-color: #7E9181;
+            --secondary-utility-color: #C7CEDB;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            margin: 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            height: 100px;
+        }
+
+        #hover-button {
+            margin-top: 10px;
+            width: 100px;
+            height: 50px;
+            transition-duration: 200ms;
+            background-color: var(--primary-utility-color);
+            color: white;
+            border: none;
+            border-radius: 15%;
+            font-size: small;
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.443);
+
+        }
+
+        #hover-button:hover {
+            color: black;
+            background-color: var(--secondary-utility-color);
+            font-size: xxx-large;
+            width: 300px;
+            height: 100px;
+        }
+
+        .moving-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+
+            transition-property: all;
+            transition-duration: 1s;
+            transition-timing-function: ease-in-out;
+            margin-top: 20px;
+            left: 10px;
+            box-shadow: -10px 10px 5px rgba(0, 0, 0, 0.443);
+        }
+
+        .moving-box.right {
+            /* move box to 20px left of viewport + box width */
+            left: calc(100vw - 220px);
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.443);
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+            .moving-box {
+                transition-duration: 0s !important;
+            }
+
+            #hover-button {
+                transition-duration: 0s !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button-container">
+        <button id='hover-button'>Hover on me</button>
+    </div>
+
+    <div class="moving-box"></div>
+
+
+    <script>
+        const button = document.getElementById('hover-button');
+        const box = document.querySelector('.moving-box');
+
+        button.addEventListener('click', () => {
+            box.classList.toggle('right');
+
+            if (document.body.style.backgroundColor == 'var(--primary-color)') {
+                document.body.style.backgroundColor = "var(--secondary-color)";
+            }
+            else {
+                document.body.style.backgroundColor = "var(--primary-color)";
+            }
+        }
+        )
+
+        button.addEventListener('mouseover', () => {
+            button.innerHTML = "CLICK ME";
+        });
+        button.addEventListener('mouseout', () => {
+            setTimeout(() => {
+                button.innerHTML = "Hover on me!";
+            }, 80);
+        });
+
+    </script>
+
+</body>
+
+</html>

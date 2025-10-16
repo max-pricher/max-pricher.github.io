@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border: 1px solid black;
+            animation-name: moving-box;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            position: relative;
+            /* left/right will only work when position is relative but transfrom will work with static */
+        }
+
+        .another-box {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            border: 1px solid black;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            position: relative;
+            /* left/right will only work when position is relative but transfrom will work with static */
+
+            transition-property: width;
+            transition-duration: 2s;
+        }
+
+        .another-box:hover {
+            width: 400px;
+        }
+
+        /* give it a start, middle, and end point for simple movements*/
+
+        @keyframes moving-box {
+            from {
+                left: 0px;
+                top: 0px;
+            }
+
+            25% {
+                top: 200px;
+                background-color: green;
+            }
+
+            50% {
+                left: 500px;
+                background-color: blue;
+            }
+
+            75% {
+                top: 0px;
+            }
+
+            to {
+                left: 0px;
+                top: 0px;
+                background-color: red;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+
+        <div class="box">
+        </div>
+        <div class="another-box">
+
+    </main>
+
+
+
+    <script>
+
+    </script>
+</body>
+
+</html>

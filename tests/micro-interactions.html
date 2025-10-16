@@ -20,22 +20,33 @@
             margin: 0;
         }
 
+        .memo-box {
+            margin-top: 30px;
+            text-align: center;
+            font-size: large;
+            color: white;
+
+        }
+
         .button-container {
+            margin-top: 15px;
             display: flex;
             justify-content: center;
             height: 100px;
+            position: relative;
         }
 
         #hover-button {
             margin-top: 10px;
-            width: 100px;
-            height: 50px;
+            margin-bottom: 10px;
+            width: 125px;
+            height: 65px;
             transition-duration: 200ms;
             background-color: var(--primary-utility-color);
-            color: white;
+            color: black;
             border: none;
             border-radius: 15%;
-            font-size: small;
+            font-size: medium;
             box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.443);
 
         }
@@ -49,9 +60,11 @@
         }
 
         .moving-box {
+            top: 0px;
             position: relative;
             width: 200px;
             height: 200px;
+            border: none;
             background-color: red;
 
             transition-property: all;
@@ -68,6 +81,42 @@
             box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.443);
         }
 
+        .moving-box.down {
+            /* move box to 20px down of viewport + box width */
+            top: calc(100vw - 220px);
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.443);
+        }
+
+
+        #moving-button {
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            background-color: var(--primary-utility-color);
+            font-size: medium;
+            color: black;
+            border: none;
+        }
+
+        .pos-0 {
+            top: 20%;
+            left: 5%;
+        }
+
+        .pos-1 {
+            top: 20%;
+            left: 75%;
+        }
+
+        .pos-2 {
+            top: 75%;
+            left: 75%;
+        }
+
+        .pos-3 {
+            top: 75%;
+            left: 25%;
+        }
 
         @media (prefers-reduced-motion: reduce) {
             .moving-box {
@@ -82,14 +131,24 @@
 </head>
 
 <body>
-    <div class="button-container">
-        <button id='hover-button'>Hover on me</button>
-    </div>
+    <main>
+        <div class="button-container">
+            <!-- should probably code an aria-label change -->
+            <button id='hover-button' aria-label="hover then click">Hover on me</button>
+        </div>
 
-    <div class="moving-box"></div>
+        <button class="moving-box" aria-label="click for a surprise"></button>
 
+        <div class="memo-box"> ---Added after submission---</div>
 
+        <div class="button-container">
+            <button id='moving-button' class="pos-0" aria-label="click for a surprise">click me?</button>
+        </div>
+
+    </main>
     <script>
+
+        // moving box and hover button script
         const button = document.getElementById('hover-button');
         const box = document.querySelector('.moving-box');
 
@@ -112,6 +171,36 @@
             setTimeout(() => {
                 button.innerHTML = "Hover on me!";
             }, 80);
+        });
+
+
+        // moving button script
+        const movingButton = document.getElementById('moving-button');
+
+        let position = 0;
+
+        movingButton.addEventListener('mouseover', () => {
+            // remove existing class defintion
+            movingButton.classList.remove('pos-0', 'pos-1', 'pos-2', 'pos-3');
+
+            position = (position + 1) % 4;
+            movingButton.classList.add('pos-' + position);
+        });
+
+        // secret button press (click me? with tab)
+        movingButton.addEventListener('click', () => {
+            box.classList.toggle('down');
+        });
+
+        // second secret button
+        box.addEventListener('click', () => {
+            const colorR = Math.floor(Math.random() * 256); const colorG = Math.floor(Math.random() * 256);
+            const colorB = Math.floor(Math.random() * 256);
+            /* got template literals from substack */
+            /* have to use this weird format, using rgb template kind of like a function*/
+            box.style.backgroundColor = `rgb(${colorR}, ${colorG}, ${colorB})`;
+
+            /* should also use this as alternative to + with concat strings */
         });
 
     </script>

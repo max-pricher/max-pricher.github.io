@@ -89,12 +89,16 @@ function displayKanyeQuote(kanyeData) {
     kanyeQuoteText.textContent = `"${kanyeData.quote}"`;
 }
 
+const christmasSound = document.getElementById('js-christmas-sound');
 const triviaButton = document.getElementById('js-new-quote');
 if (triviaButton) {
     triviaButton.addEventListener('click', () => {
         getQuote();
         // set answer text to empty when new question is generated
         answerText.textContent = '';
+
+        // play christmas noise
+        christmasSound.play();
     });
 }
 

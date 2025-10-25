@@ -15,6 +15,11 @@ body {
   background-color: #c9bd95;
 }
 
+.fakeQuote {
+  display: flex;
+  align-items: center;
+}
+
 .app {
   position: absolute;
   top: 50%;
@@ -30,19 +35,27 @@ header {
   width: 100%;
   font-size: 30px;
   text-align: center;
+  justify-content: center;
   padding: 10px;
   border-bottom: 1px solid #ebebeb;
 }
 
 .quotes {
+  font-size: clamp(18px, 2.5vw, 24px);
   padding: 20px 50px;
   min-height: 200px;
 }
 
 .quote-text {
   padding-bottom: 20px;
-  font-size: 25px;
   color: black;
+}
+
+#js-random-celebrity-name {
+  color: #555555;
+  padding-bottom: 10px;
+  margin-right: 10px;
+
 }
 
 .controls {
@@ -54,6 +67,7 @@ header {
   display: block;
   color: white;
   border-radius: 4px;
+  margin: 10px;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -62,6 +76,9 @@ header {
   font-size: 20px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
+
+
+
 
 .twitter {
   background-color: #1da1f2;
@@ -82,6 +99,38 @@ header {
 }
 
 .new-quote:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+
+.answer {
+  background-color: #75dda0;
+  margin-bottom: 15px;
+}
+
+.answer:hover {
+  background-color: #0c6c1e;
+}
+
+.answer:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+
+.celebrity {
+  background-color: #17adf8;
+  margin-bottom: 15px;
+}
+
+.celebrity:hover {
+  background-color: #093462;
+}
+
+.celebrity:disabled {
   background-color: #cccccc;
   color: #666666;
   cursor: not-allowed;

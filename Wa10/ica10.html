@@ -6,24 +6,51 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="ica10.css">
 </head>
 
 <body>
   <div class="app">
-    <header>Random Christmas Trivia</header>
-    <section class="quotes">
-      <div class="quote-text" id="js-quote-text"></div>
-      <div class="quote-text" id="js-answer-text"></div>
-    </section>
+
     <section class="controls">
       <button type="button" id="js-new-quote" class="new-quote button">
         Generate a new bit of trivia!
       </button>
-      <button type="button" id="js-tweet" class="twitter button">
+      <button type="button" id="js-show-answer" class="answer button">
         Show me the answer!
       </button>
+
+
+      <button type="button" id="js-kanye-quote-button" class="celebrity button">
+        Get Celebrity Quote
+      </button>
+
       <!-- <a class="answer button" id="js-tweet" target="_blank" rel="noreferrer">Show me the answer!</a> -->
     </section>
+
+    <header>Random Christmas Trivia</header>
+
+    <section class="quotes">
+      <div class="quote-text" id="js-quote-text"></div>
+
+      <div class="quote-text" id="js-answer-text"></div>
+
+      <header>Random Celebrity Quote</header>
+      <div class="fakeQuote">
+        <div class="quote-text" id="js-random-celebrity-name"></div>
+        <div class="quote-text" id="js-kanye-quote-text"></div>
+      </div>
+
+    </section>
+  </div>
+
+
+
+  <!-- to make it look like these kanye quotes are normal celebrities-->
+
+
+
+
   </div>
   <script src="ica10.js"></script>
 </body>

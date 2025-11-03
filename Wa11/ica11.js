@@ -72,12 +72,9 @@ const FAVS_KEY = 'movieAppFavs';
 
 function getFavs() {
     const favsString = localStorage.getItem(FAVS_KEY);
-    if (!favsString) {
-        return [];
-    }
-    return JSON.parse(favsString); // alternative form
-    // one line if statement
-    // return favorites ? JSON.parse(favorites) : [];
+
+    // one line if statements, should start using more
+    return favsString ? JSON.parse(favsString) : [];
 }
 
 
@@ -147,10 +144,10 @@ exportButton.addEventListener('click', () => {
 
     // Create a temporary link element to trigger the download
     const downloadAnchor = document.createElement('a');
-    downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", "my_movie_favorites.json");
+    downloadAnchor.setAttribute("href", dataStr); // set download link
+    downloadAnchor.setAttribute("download", "my_movie_favorites.json"); // set file name
     document.body.appendChild(downloadAnchor); // Required for Firefox
-    downloadAnchor.click();
-    downloadAnchor.remove(); // Clean up the temporary link
+    downloadAnchor.click(); // Trigger the download
+    downloadAnchor.remove(); // remove temporary link
     alert("Favorites exported!");
 }); 

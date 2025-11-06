@@ -30,6 +30,9 @@ main {
 .site-name {
     margin: 20px auto 0px auto;
     font-size: clamp(3rem, 4vw, 7rem);
+    font-family: "spalla", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .search-area {
@@ -37,16 +40,18 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10%;
+
 
 }
 
 .search-motto {
     color: var(--primary-Text-Color);
     font-size: clamp(2rem, 3vw, 5rem);
-
-
-
+    font-family: "spalla", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(1.5rem, 2.5vw, 4rem);
+    margin-top: 5px;
 }
 
 .search-bar {
@@ -59,14 +64,25 @@ main {
     box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
+.main-search-bar-label {
+    font-family: sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .search-button {
     width: 125px;
     height: 30px;
     margin-top: 10px;
 }
 
+.result-card {
+    text-align: left;
+    margin: 10% auto;
+}
+
+
 .reccomended-searches {
     margin-top: 10px;
     border-top: dashed 3px;
-
 }

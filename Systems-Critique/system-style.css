@@ -34,7 +34,7 @@ main {
     flex-wrap: wrap;
     background-color: var(--keywords-Background);
     border: 2px solid var(--keywords-Border);
-    margin: 0 auto 10px auto;
+    margin: 5px auto 10px auto;
     align-items: center;
     justify-content: center;
 }
@@ -56,6 +56,11 @@ main {
     text-decoration: line-through;
 }
 
+.update-reminder-label {
+    color: red;
+    font-size: clamp(1rem, 1.5vw, 2.5rem);
+    visibility: hidden;
+}
 
 .blockWord-block {
     margin: 5px;

@@ -1,6 +1,6 @@
 
 const searchBar = document.getElementById('main-search-bar');
-
+const updateReminder = document.getElementById('js-update-reminder');
 // empty array for keywords, let allows it to not conflict with other scripts e.g. scope is this file
 let keywords = [];
 
@@ -30,6 +30,8 @@ searchBar.addEventListener('keydown', (event) => {
         // display keywords
         const keywordsContainer = document.getElementById('js-keywords-container');
         displayKeywordContainer(keywordsContainer);
+        // show update warning
+        updateReminder.style.visibility = 'visible';
     }
 });
 
@@ -53,6 +55,9 @@ searchButton.addEventListener('click', () => {
 
     // clear bar when finished
     searchBar.value = "";
+
+    // remove update warning
+    updateReminder.style.visibility = 'hidden';
 });
 
 function getRelevantResults(searchResults) {
@@ -196,6 +201,9 @@ function displayKeywordContainer(keywordsContainer) {
             // clear old render
             keywordsContainer.innerHTML = "";
             displayKeywordContainer(keywordsContainer);
+            // display updated warning
+            updateReminder.style.visibility = 'visible';
+
         }); // end of event listener
         keywordsContainer.appendChild(keywordBlock);
     }
@@ -212,6 +220,8 @@ function displayKeywordContainer(keywordsContainer) {
                 blockWords.splice(blockWord, 1);
             }
             displayKeywordContainer(keywordsContainer);
+            // display update warning
+            updateReminder.style.visibility = 'visible';
         });
         keywordsContainer.appendChild(blockWordBlock);
     }

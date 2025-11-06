@@ -1,7 +1,7 @@
 // first attempt at using JSON
 // Referenced https://www.w3schools.com/js/js_json_syntax.asp
 
-const websites = [
+const WEBSITES = [
     {
         "title": "On ‘Saturday Night Live,’ a Milestone for Domingo",
         "url": "https://www.nytimes.com/2025/10/19/arts/television/snl-sabrina-carpenter-trump-george-santos.html",

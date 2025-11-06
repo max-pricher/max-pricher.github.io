@@ -21,8 +21,10 @@ searchBar.addEventListener('keydown', (event) => {
             }
             else // treat as regular keyword
             {
-                console.log(currentKeyword);
-                keywords.push(currentKeyword)
+                if (!keywords.includes(currentKeyword)) {
+                    console.log(currentKeyword);
+                    keywords.push(currentKeyword);
+                }
             }
         }
         // clear bar
@@ -39,12 +41,14 @@ searchBar.addEventListener('keydown', (event) => {
 const searchButton = document.getElementById('js-search-button');
 searchButton.addEventListener('click', () => {
     if (keywords.includes("_all")) {
-        // make a copy of websites
-        let allWebsites = websites;
+        // make a copy of WEBSITES
+        let allWEBSITES = WEBSITES;
         // remove block words for testing
-        filterblockWords(allWebsites);
-        // display filteres websites
-        displayResults(allWebsites);
+        filterblockWords(allWEBSITES);
+        // sort by relevance
+        getRelevantResults(allWEBSITES);
+        // display filtered WEBSITES
+        displayResults(allWEBSITES);
     } else if (keywords.length > 0) {
         searchKeywords();
     }
@@ -60,13 +64,13 @@ searchButton.addEventListener('click', () => {
     updateReminder.style.visibility = 'hidden';
 });
 
-function getRelevantResults(searchResults) {
+function getPossibleResults(searchResults) {
     // itterate through every keyword inputted
     for (let keyword = 0; keyword < keywords.length; keyword++) {
         // and check every website
         const currentKeyword = keywords[keyword];
-        for (let website = 0; website < websites.length; website++) {
-            const currentWebsite = websites[website];
+        for (let website = 0; website < WEBSITES.length; website++) {
+            const currentWebsite = WEBSITES[website];
             const currentTitle = currentWebsite.title.toLowerCase();
             const currentDescription = currentWebsite.description.toLowerCase();
 
@@ -88,8 +92,8 @@ function filterblockWords(searchResults) {
     for (let blockWord = 0; blockWord < blockWords.length; blockWord++) {
         // and check every result
         const currentblockWord = blockWords[blockWord];
-        for (let website = 0; website < websites.length; website++) {
-            const currentWebsite = websites[website];
+        for (let website = 0; website < WEBSITES.length; website++) {
+            const currentWebsite = WEBSITES[website];
             const currentTitle = currentWebsite.title.toLowerCase();
             const currentDescription = currentWebsite.description.toLowerCase();
 
@@ -106,11 +110,37 @@ function filterblockWords(searchResults) {
     // finished searching
 }
 
+// article used for sorting https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+function getRelevantResults(searchResults) {
+    searchResults.sort((a, b) => {
+        return getKeywordOccurence(b) - getKeywordOccurence(a);
+    });
+}
+
+// function to return a WEBSITES  keyword occurence score
+function getKeywordOccurence(website) {
+    let score = 0;
+    // get title and description
+    const title = website.title.toLowerCase();
+    const description = website.description.toLowerCase();
+
+    // itterate through every keyword
+    for (let keyword = 0; keyword < keywords.length; keyword++) {
+        const currentKeyword = keywords[keyword];
+        if (title.includes(currentKeyword) || description.includes(currentKeyword)) {
+            score++;
+        }
+    }
+    return score;
+}
+
 function searchKeywords() {
     let searchResults = [];
     // pass by reference is default in JS
-    getRelevantResults(searchResults);
+    getPossibleResults(searchResults);
     filterblockWords(searchResults);
+    getRelevantResults(searchResults);
     //filterBlocklist(searchResults); 
     //applySorting(searchResults);
     //applyPrefrences(searchResults); 

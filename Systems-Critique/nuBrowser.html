@@ -12,15 +12,21 @@
 <body>
     <header class="browser-header">
         <h1 class="site-name">Nu Browser</h1>
-
+        <h2 class="search-motto">Search simpler</h2>
     </header>
-    <main>
-        <div class="search-area">
-            <h2 class="search-motto"> Search safer</h2>
 
+    <main>
+        <div class="keywords-container" id="js-keywords-container">
+
+
+        </div>
+
+        <div class="search-area">
             <!-- stretch goal! change search placeholder with random sentences -->
             <label for="main-search-bar" class="main-search-bar-label">Search</label>
-            <input id="main-search-bar" class="search-bar" type="search" placeholder="Type your search here...">
+
+
+            <input id="main-search-bar" class="search-bar" type="search" placeholder=" Keyword + Enter">
             <button class="search-button" id="js-search-button">Search</button>
         </div>
 
@@ -42,6 +48,7 @@
     </footer>
 
     <script src="system-script.js"></script>
+    <script src="website-list.js"></script>
 
 </body>
 

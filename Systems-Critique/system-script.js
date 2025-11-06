@@ -9,16 +9,27 @@ searchBar.addEventListener('keydown', (event) => {
     // filter only for enter key
     if (event.key === 'Enter') {
         // search logic...
-        let currentKeyword = "null";
-        currentKeyword = searchBar.value.trim().toLowerCase();
-        if (currentKeyword != "null" && currentKeyword != "") {
-            console.log(currentKeyword);
-            keywords.push(currentKeyword)
+
+        let currentKeyword = searchBar.value.trim().toLowerCase();
+        if (currentKeyword) {
+            if (currentKeyword[0] == '-') // treat as block word
+            {
+                // remove the -
+                let blockWord = currentKeyword.substring(1); // remove leading character
+                console.log(`block added: ${blockWord}`);
+                blockWords.push(blockWord);
+            }
+            else // treat as regular keyword
+            {
+                console.log(currentKeyword);
+                keywords.push(currentKeyword)
+            }
         }
         // clear bar
         searchBar.value = "";
         // display keywords
-        displayKeywords();
+        const keywordsContainer = document.getElementById('js-keywords-container');
+        displayKeywordContainer(keywordsContainer);
     }
 });
 
@@ -26,7 +37,12 @@ searchBar.addEventListener('keydown', (event) => {
 const searchButton = document.getElementById('js-search-button');
 searchButton.addEventListener('click', () => {
     if (keywords.includes("_all")) {
-        displayResults(websites);
+        // make a copy of websites
+        let allWebsites = websites;
+        // remove block words for testing
+        filterblockWords(allWebsites);
+        // display filteres websites
+        displayResults(allWebsites);
     } else if (keywords.length > 0) {
         searchKeywords();
     }
@@ -39,9 +55,7 @@ searchButton.addEventListener('click', () => {
     searchBar.value = "";
 });
 
-function searchKeywords() {
-    let searchResults = [];
-
+function getRelevantResults(searchResults) {
     // itterate through every keyword inputted
     for (let keyword = 0; keyword < keywords.length; keyword++) {
         // and check every website
@@ -55,11 +69,48 @@ function searchKeywords() {
                 if (!searchResults.includes(currentWebsite)) {
                     // push the index of the website to search results
                     searchResults.push(currentWebsite);
-                    console.log(currentWebsite);
                 }
             }
         }
     }
+    // finished searching
+}
+
+let blockWords = [];
+
+function filterblockWords(searchResults) {
+    // itterate through every blockWord in array
+    for (let blockWord = 0; blockWord < blockWords.length; blockWord++) {
+        // and check every result
+        const currentblockWord = blockWords[blockWord];
+        for (let website = 0; website < websites.length; website++) {
+            const currentWebsite = websites[website];
+            const currentTitle = currentWebsite.title.toLowerCase();
+            const currentDescription = currentWebsite.description.toLowerCase();
+
+            if (currentTitle.includes(currentblockWord) || currentDescription.includes(currentblockWord)) {
+                // if it exists in the list
+                if (searchResults.includes(currentWebsite)) {
+                    // get index and splice it out, god bless indexOf
+                    const index = searchResults.indexOf(currentWebsite);
+                    searchResults.splice(index, 1);
+                }
+            }
+        }
+    }
+    // finished searching
+}
+
+function searchKeywords() {
+    let searchResults = [];
+    // pass by reference is default in JS
+    getRelevantResults(searchResults);
+    filterblockWords(searchResults);
+    //filterBlocklist(searchResults); 
+    //applySorting(searchResults);
+    //applyPrefrences(searchResults); 
+
+
     //done searching
     console.log(searchResults.length);
     displayResults(searchResults);
@@ -117,28 +168,51 @@ function displayResults(searchResults) {
 
 
 
-function displayKeywords() {
-    const keywordsContainer = document.getElementById('js-keywords-container');
-
-    // clear old render
+function displayKeywordContainer(keywordsContainer) {
+    // clear render
     keywordsContainer.innerHTML = "";
-
+    // add keywords
     for (let keyword = 0; keyword < keywords.length; keyword++) {
-        // span because we dont want the element on a new line
-        const keywordBlock = document.createElement('span');
+        // button because we  want our element to be able to focus and be clickable
+        const keywordBlock = document.createElement('button');
         keywordBlock.className = 'keyword-block';
         keywordBlock.textContent = keywords[keyword];
 
         // needs to be within function due to it being dynamic
         keywordBlock.addEventListener('click', () => {
 
+            // if leading char is - treat as block word
+            if (keyword[0] == '-') {
+                // treat the keyword as a block word
+                blockWords.splice(keyword, 1);
+            }
             // if keyword exists or in bounds
-            if (keyword > -1) {
+            else if (keyword > -1) {
                 // splice one element from array and indice of keyword 
                 keywords.splice(keyword, 1);
             }
-            displayKeywords();
-        });
+            const keywordsContainer = document.getElementById('js-keywords-container');
+
+            // clear old render
+            keywordsContainer.innerHTML = "";
+            displayKeywordContainer(keywordsContainer);
+        }); // end of event listener
         keywordsContainer.appendChild(keywordBlock);
+    }
+    for (let blockWord = 0; blockWord < blockWords.length; blockWord++) {
+        const blockWordBlock = document.createElement('button');
+        blockWordBlock.className = 'blockWord-block';
+        blockWordBlock.textContent = blockWords[blockWord];
+        // needs to be within function due to it being dynamic
+        // when clicked, removes block word from array
+        blockWordBlock.addEventListener('click', () => {
+            // if block word exists or in bounds
+            if (blockWord > -1) {
+                // splice one element from array and indice of block word 
+                blockWords.splice(blockWord, 1);
+            }
+            displayKeywordContainer(keywordsContainer);
+        });
+        keywordsContainer.appendChild(blockWordBlock);
     }
 }

@@ -35,7 +35,6 @@ main {
     background-color: var(--keywords-Background);
     border: 2px solid var(--keywords-Border);
     margin: 0 auto 10px auto;
-
     align-items: center;
     justify-content: center;
 }
@@ -43,9 +42,36 @@ main {
 .keyword-block {
     margin: 5px;
     font-size: clamp(1rem, 1.5vw, 2.5rem);
+
+    border: none;
+    /* fake button transparency */
+    background: var(--keywords-Background);
 }
 
 .keyword-block:hover {
+    text-decoration: line-through;
+}
+
+.keyword-block:focus {
+    text-decoration: line-through;
+}
+
+
+.blockWord-block {
+    margin: 5px;
+    font-size: clamp(1rem, 1.5vw, 2.5rem);
+    color: red;
+
+    border: none;
+    /* fake button transparency */
+    background: var(--keywords-Background);
+}
+
+.blockWord-block:hover {
+    text-decoration: line-through;
+}
+
+.blockWord-block:focus {
     text-decoration: line-through;
 }
 

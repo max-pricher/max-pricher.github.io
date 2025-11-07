@@ -10,6 +10,7 @@ searchBar.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         // search logic...
 
+        // interpret and store keyword
         let currentKeyword = searchBar.value.trim().toLowerCase();
         if (currentKeyword) {
             if (currentKeyword[0] == '-') // treat as block word
@@ -25,43 +26,40 @@ searchBar.addEventListener('keydown', (event) => {
                     console.log(currentKeyword);
                     keywords.push(currentKeyword);
                 }
+            } // keyword has been added
+            if (keywords.includes("_all")) {
+                // make a copy of WEBSITES
+                let allWEBSITES = WEBSITES;
+                // remove block words for testing
+                filterblockWords(allWEBSITES);
+                // sort by relevance
+                getRelevantResults(allWEBSITES);
+                // display filtered WEBSITES
+                displayResults(allWEBSITES);
+            } else if (keywords.length > 0) {
+                searchKeywords();
+            }
+            else {
+                // clear results
+                displayResults([]);
             }
         }
+
         // clear bar
         searchBar.value = "";
         // display keywords
         const keywordsContainer = document.getElementById('js-keywords-container');
         displayKeywordContainer(keywordsContainer);
-        // show update warning
-        updateReminder.style.visibility = 'visible';
     }
 });
 
 
 const searchButton = document.getElementById('js-search-button');
 searchButton.addEventListener('click', () => {
-    if (keywords.includes("_all")) {
-        // make a copy of WEBSITES
-        let allWEBSITES = WEBSITES;
-        // remove block words for testing
-        filterblockWords(allWEBSITES);
-        // sort by relevance
-        getRelevantResults(allWEBSITES);
-        // display filtered WEBSITES
-        displayResults(allWEBSITES);
-    } else if (keywords.length > 0) {
-        searchKeywords();
-    }
-    else {
-        // clear results
-        displayResults([]);
-    }
+
 
     // clear bar when finished
     searchBar.value = "";
-
-    // remove update warning
-    updateReminder.style.visibility = 'hidden';
 });
 
 function getPossibleResults(searchResults) {
@@ -231,9 +229,6 @@ function displayKeywordContainer(keywordsContainer) {
             // clear old render
             keywordsContainer.innerHTML = "";
             displayKeywordContainer(keywordsContainer);
-            // display updated warning
-            updateReminder.style.visibility = 'visible';
-
         }); // end of event listener
         keywordsContainer.appendChild(keywordBlock);
     }
@@ -250,8 +245,6 @@ function displayKeywordContainer(keywordsContainer) {
                 blockWords.splice(blockWord, 1);
             }
             displayKeywordContainer(keywordsContainer);
-            // display update warning
-            updateReminder.style.visibility = 'visible';
         });
         keywordsContainer.appendChild(blockWordBlock);
     }

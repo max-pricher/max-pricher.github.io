@@ -41,39 +41,29 @@ main {
     justify-content: center;
 }
 
-.keyword-block {
+.searchTerm-block {
     margin: 5px;
     font-size: clamp(1rem, 1.5vw, 2.5rem);
-
     border: none;
     /* fake button transparency */
     background: var(--keywords-Background);
 }
 
-.keyword-block:hover {
+.searchTerm-block:hover {
     text-decoration: line-through;
 }
 
-.keyword-block:focus {
+.searchTerm-block:focus {
     text-decoration: line-through;
 }
 
 .blockWord-block {
-    margin: 5px;
-    font-size: clamp(1rem, 1.5vw, 2.5rem);
+    /*  just for block terms */
     color: var(--blocked-Keyword-Text);
-
-    border: none;
-    /* fake button transparency */
-    background: var(--keywords-Background);
 }
 
-.blockWord-block:hover {
-    text-decoration: line-through;
-}
-
-.blockWord-block:focus {
-    text-decoration: line-through;
+.keyword-block {
+    color: var(--keyword-Text);
 }
 
 .browser-header {

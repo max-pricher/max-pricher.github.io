@@ -27,7 +27,6 @@
 
 
             <input id="main-search-bar" class="search-bar" type="search" placeholder=" Keyword + Enter">
-            <button class="search-button" id="js-search-button">Search</button>
         </div>
 
         <div class="search-results" id="js-search-container">
@@ -35,21 +34,26 @@
         </div>
 
         <div class="reccomended-searches">
+        </div>
 
+        <div class="bookmarks-container" id="js-bookmarks-container">
+            <button class="add-list-button" id="js-add-list-button">+ Add List</button>
+            <div class="bookmark-list" id="js-bookmark-lists">
 
+            </div>
         </div>
     </main>
 
     <footer>
-        <label for="saveMyPreferences">Save my preferences</label>
-        <input type="checkbox" id="saveMyPreferences" class="browserCheckBox">
+        <label for="js-privacy-checkbox" id="js-save-preferences">Save my preferences</label>
+        <input type="checkbox" id="js-privacy-checkbox" class="browser-check-box">
+        <button id="js-delete-user-data" class="footer-button">Delete my data</button>
+
+        <!-- load websites before system script -->
+        <script src="website-list.js"></script>
+        <script src="system-script.js"></script>
 
 
-    </footer>
-
-    <!-- load websites before system script -->
-    <script src="website-list.js"></script>
-    <script src="system-script.js"></script>
 
 
 </body>

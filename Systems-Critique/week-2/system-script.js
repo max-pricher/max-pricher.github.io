@@ -116,7 +116,9 @@ function getKeywordOccurence(website) { // how many unique keywords were found i
     return score; // how many unique keywords were found
 }
 
-// display results
+let activeBookmarkWebsite = null;
+
+// display results in relevance to current website
 function displayResults(searchResults) {
     // get container
     const resultsContainer = document.getElementById('js-search-container');
@@ -145,14 +147,63 @@ function displayResults(searchResults) {
         const websiteTitle = document.createElement('h3');
         websiteTitle.textContent = website.title;
 
+        // description button wrap
+        const descriptionContainer = document.createElement('div');
+        descriptionContainer.className = 'description-container';
+
         // create description
         const websiteDescription = document.createElement('p');
         websiteDescription.textContent = website.description; // assign description
 
+        // create bookmark button
+        const bookmarkButton = document.createElement('button');
+        bookmarkButton.className = "bookmark-button";
+
+        if (website.saved) {
+            bookmarkButton.classList.add('bookmarked');
+        } else {
+            bookmarkButton.classList.remove('bookmarked');
+        }
+
+        // create event listener
+        bookmarkButton.addEventListener('click', () => {
+            if (localStorage.getItem('dataConsent') !== 'true') {
+                alert("Please enable data storage consent in order to use bookmarks.");
+                return;
+            }
+            if (website.saved) // if website clicked is already saved
+            {
+                // check if website open
+                if (bookmarksContainer.style.display === 'flex' && activeBookmarkWebsite === website) {
+                    bookmarksContainer.style.display = 'none'; // close window
+                    activeBookmarkWebsite = null;
+                }
+                else {
+                    activeBookmarkWebsite = website; // set active website
+                    displayBookmarks(bookmarkButton); // open window
+                }
+            }
+            else {
+                website.saved = true;
+                bookmarkButton.classList.add('bookmarked');
+
+                const masterList = getBookmarks();
+                if (!inMasterList(website)) {
+                    masterList["All saves"].push(website);
+                    syncBookmarkLists(masterList);
+                }
+            }
+        });
+
+
         // append elements to card
         websiteLink.appendChild(websiteTitle); // append h3 title
         card.appendChild(websiteLink); // append link 
-        card.appendChild(websiteDescription); // append description
+
+        descriptionContainer.appendChild(websiteDescription); // add description to description container
+        descriptionContainer.appendChild(bookmarkButton); // add bookmark to description container
+
+        card.appendChild(descriptionContainer); // append description container
         resultsContainer.appendChild(card); // add finished container to results
     }
 }
@@ -184,7 +235,7 @@ function updateKeywordContainer() {
         searchTerm.addEventListener('click', () => { // add listener to element
             // get text to remove since button doesnt know it's own index just it's content
             const buttonText = searchTerm.textContent;
-            if (searchTerm.className == "keyword-block") { // if class is a keyword block
+            if (searchTerm.classList.contains("keyword-block")) { // if class is a keyword block
                 const index = keywords.indexOf(buttonText);
                 if (index > -1) {
                     keywords.splice(index, 1); // remove the block from the keywords array
@@ -202,3 +253,198 @@ function updateKeywordContainer() {
         keywordsContainer.appendChild(searchTerm); // add finished child
     }
 }
+
+
+// local storage
+
+const EXPIRATION_TIME = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
+const STORAGE_KEYS = [
+    'bookmarkList',
+    'lastAccesedTime',
+    'dataConsent' // match preferences button
+];
+
+function getBookmarks() {
+    if (localStorage.getItem('dataConsent') !== 'true') // if consent does not exist
+    {
+        return { "All saves": [] }; // return default/empty list
+    }
+
+    const bookmarkList = localStorage.getItem('bookmarkList'); // get bookmark list
+    if (!bookmarkList) // if none exists
+    {
+        return { "All saves": [] }; // return default/empty list
+    }
+    return JSON.parse(bookmarkList); // return JSON parsed list
+}
+
+function syncBookmarkLists(newList) { // function to sync bookmark lists to local storage, should only be called when dataConsent is true
+    localStorage.setItem('bookmarkList', JSON.stringify(newList));
+    localStorage.setItem('lastAccesedTime', Date.now());
+}
+
+function inList(currentWebsite, currentList) { // function checks if a website exists within a singular list
+    return currentList.some(website => website.url === currentWebsite.url); // check if any item in list matches website url
+}
+
+function inMasterList(website) { // function checks if a website exists within the master list of lists
+    const masterList = getBookmarks(); // get current master list
+    for (let listIndex in masterList) { // better way to use a for loop with an array
+        if (inList(website, masterList[listIndex])) { // if website found in any list
+            return true;
+        }
+    }
+    return false; // if not found in any list
+}
+
+// DOM for bookmarking system
+const bookmarksContainer = document.querySelector('.bookmarks-container');
+const addListButton = document.getElementById('js-add-list-button');
+const bookmarkListDiv = document.getElementById('js-bookmark-lists');
+
+addListButton.addEventListener('click', () => {
+    const newListName = prompt("Enter new list name:");
+    if (newListName) {
+        const masterList = getBookmarks(); // get current master list
+        if (!masterList[newListName]) { // if a list with that name doesn't exist
+            masterList[newListName] = []; // make it
+            syncBookmarkLists(masterList); // and add this list to the master list
+            bookmarksContainer.style.display = 'none'; // close window
+            activeBookmarkWebsite = null; // reset active website
+        }
+        else {
+            alert("A list with that name already exists");
+        }
+    }
+});
+
+
+function displayBookmarks(button) { // function to display the container for the master bookmark list
+    if (!activeBookmarkWebsite || localStorage.getItem('dataConsent') !== 'true') { // if no active website or no consent
+        return; // no active website or user has not consented to data storage
+    }
+
+    // get button position and move container
+    const buttonPos = button.getBoundingClientRect(); // get position of button
+    bookmarksContainer.style.top = (buttonPos.bottom + window.scrollY) + 'px';
+    bookmarksContainer.style.left = (buttonPos.left + window.scrollX) + 'px';
+
+    // draw menu
+    bookmarkListDiv.innerHTML = ""; // clear previous render
+    const masterList = getBookmarks(); // get current master list
+    const userLists = Object.keys(masterList); // get every list name
+
+    // go through every user list and initialize
+    userLists.forEach(listName => {
+        // create label for each list
+        const itemLabel = document.createElement('label');
+        itemLabel.className = 'bookmark-list-item';
+
+        // create checkbox for each list
+        const resultInList = document.createElement('input');
+        resultInList.type = 'checkbox';
+        resultInList.value = listName;
+
+        if (inList(activeBookmarkWebsite, masterList[listName])) { // if website exists in any saved list
+            resultInList.checked = true; // checkbox default checked
+        }
+
+        // Add a listener for each list's checkbox
+        resultInList.addEventListener('change', () => {
+            const currentLists = getBookmarks();
+
+            if (resultInList.checked) { // if adding website to this list
+                currentLists[listName].push(activeBookmarkWebsite); // ADD website to this list
+            } else {
+                // REMOVE website from this list
+                const index = currentLists[listName].findIndex(item => item.title === activeBookmarkWebsite.title); // find index of website
+                if (index > -1) {
+                    currentLists[listName].splice(index, 1); // REMOVE website from this list
+                }
+            }
+
+            syncBookmarkLists(currentLists);
+
+            if (inMasterList(activeBookmarkWebsite)) {
+                activeBookmarkWebsite.saved = true;
+                button.classList.add('bookmarked');
+            } else {
+                activeBookmarkWebsite.saved = false;
+                button.classList.remove('bookmarked');
+            }
+        }); //end of listener
+
+        itemLabel.appendChild(resultInList);
+        itemLabel.appendChild(document.createTextNode(" " + listName));
+        bookmarkListDiv.appendChild(itemLabel);
+
+
+    });
+    bookmarksContainer.style.display = 'flex';
+}
+
+// function to assign saved status on load
+function loadSavedData() {
+    // set all WEBSITES saved status
+    WEBSITES.forEach(currentSite => {
+        if (inMasterList(currentSite)) {
+            currentSite.saved = true;
+        }
+        else {
+            currentSite.saved = false;
+        }
+    });
+
+}
+
+function checkDataExpiration() {
+    const lastAccesedTime = localStorage.getItem('lastAccesedTime');
+    const currentTime = Date.now();
+    // if past expiration, clear all data and return true
+    if (lastAccesedTime && (currentTime - lastAccesedTime > EXPIRATION_TIME)) {
+        clearAllUserData();
+        return true;
+    }
+    // if data isnt expired, return false
+    return false;
+}
+
+function clearAllUserData() {
+    STORAGE_KEYS.forEach(key => {
+        localStorage.removeItem(key);
+    });
+    localStorage.setItem('dataConsent', 'false');
+    window.location.reload();
+}
+
+// delete user data
+const deleteDataButton = document.getElementById('js-delete-user-data');
+deleteDataButton.addEventListener('click', () => {
+
+    clearAllUserData();
+});
+
+const privacyCheckbox = document.getElementById('js-privacy-checkbox');
+privacyCheckbox.addEventListener('change', () => {
+    if (privacyCheckbox.checked) {
+        localStorage.setItem('dataConsent', 'true');
+        localStorage.setItem('lastAccesedTime', Date.now());
+    } else {
+        localStorage.setItem('dataConsent', 'false');
+        clearAllUserData();
+    }
+});
+
+window.addEventListener('load', () => {
+    if (checkDataExpiration()) // if data is expired
+    {
+        // user data should be deleted
+        privacyCheckbox.checked = false;
+        localStorage.setItem('dataConsent', 'false');
+    } else {
+        privacyCheckbox.checked = localStorage.getItem('dataConsent') === 'true';
+        localStorage.setItem('lastAccesedTime', Date.now());
+    }
+    loadSavedData();
+
+});

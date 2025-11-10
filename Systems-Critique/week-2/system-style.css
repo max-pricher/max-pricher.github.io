@@ -1,17 +1,15 @@
 :root {
     --primary-Color: #FFFFFF;
+    --secondary-Color: #e3e3e3;
+    --utility-Color: #990F0F;
+    
     --primary-Text-Color: #322f2f;
     --search-Color: #f2f2f2;
     --search-Border: #e3e3e3;
-    --search-Border-Focus: #990F0F;
     --search-Text: #060606;
-    --button-Color: #e3e3e3;
-    --button-Text: #e3e3e3;
     --keyword-Text: #060606;
     --keywords-Background: #f2f2f2;
-    --keywords-Border: #e3e3e3;
-    --blocked-Keyword-Text: #990F0F;
-
+    --footer-button-color: #746e6e;
 }
 
 body {
@@ -35,7 +33,7 @@ main {
     width: 70vw;
     flex-wrap: wrap;
     background-color: var(--keywords-Background);
-    border: 2px solid var(--keywords-Border);
+    border: 2px solid var(--secondary-Color);
     margin: 5px auto 10px auto;
     align-items: center;
     justify-content: center;
@@ -59,7 +57,7 @@ main {
 
 .blockWord-block {
     /*  just for block terms */
-    color: var(--blocked-Keyword-Text);
+    color: var(--utility-Color);
 }
 
 .keyword-block {
@@ -108,7 +106,7 @@ main {
 }
 
 .search-bar:focus {
-    outline: 2px solid var(--search-Border-Focus);
+    outline: 2px solid var(--utility-Color);
     border: none;
 }
 
@@ -120,19 +118,61 @@ main {
     font-style: normal;
 }
 
-.search-button {
-    width: 125px;
-    height: 30px;
-    margin-top: 20px;
-}
-
 .result-card {
     text-align: left;
     margin: 25px auto;
 }
 
+.bookmark-button {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
+
+.bookmarked {
+    background-color: var(--utility-Color);
+}
+
+/* list of bookmarks e.g. cooking, studying. will display when you click bookmark button */
+.bookmarks-container {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    width: 200px;
+    /* Made it a bit wider */
+    height: auto;
+    min-height: 75px;
+
+    background-color: var(--primary-Color);
+    border: 1px solid var(--search-Border);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    /* Make sure it's on top */
+    border-radius: 4px;
+}
+
+/* list of websites */
+.bookmark-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-button {
+    width: 100px;
+    height: 40px;
+    background-color: var(--footer-button-color);
+    color: var(--primary-Color);
+    border: none;
+    border-radius: 10%;
+    margin: 10px;
+}
 
 .reccomended-searches {
     margin-top: 10px;
     border-top: dashed 3px;
+}
+
+.description-container {
+    display: flex;
+    flex-direction: row;
 }

@@ -27,20 +27,6 @@ searchBar.addEventListener('keydown', (event) => {
                     keywords.push(currentKeyword);
                 }
             } // keyword has been added
-            if (keywords.includes("_all")) {
-                // make a copy of WEBSITES
-                let allWEBSITES = WEBSITES;
-                // remove block words for testing
-                filterblockWords(allWEBSITES);
-                // display filtered WEBSITES
-                displayResults(allWEBSITES);
-            } else if (keywords.length > 0) {
-                searchKeywords();
-            }
-            else {
-                // clear results
-                displayResults([]);
-            }
         }
 
         // clear bar
@@ -54,6 +40,21 @@ searchBar.addEventListener('keydown', (event) => {
 
 const searchButton = document.getElementById('js-search-button');
 searchButton.addEventListener('click', () => {
+
+    if (keywords.includes("_all")) {
+        // make a copy of WEBSITES
+        let allWEBSITES = WEBSITES;
+        // remove block words for testing
+        filterblockWords(allWEBSITES);
+        // display filtered WEBSITES
+        displayResults(allWEBSITES);
+    } else if (keywords.length > 0) {
+        searchKeywords();
+    }
+    else {
+        // clear results
+        displayResults([]);
+    }
 
 
     // clear bar when finished

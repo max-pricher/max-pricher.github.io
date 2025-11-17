@@ -342,7 +342,7 @@ function syncBookmarkLists(newList) { // function to sync bookmark lists to loca
 }
 
 function inList(currentWebsite, currentList) { // function checks if a website exists within a singular list
-    return currentList.some(website => website.url === currentWebsite.url); // check if any item in list matches website url
+    return currentList.some(website => website.title === currentWebsite.title); // check if any item in list matches website title, was using url but not every site has unique url
 }
 
 function inMasterList(website) { // function checks if a website exists within the master list of lists

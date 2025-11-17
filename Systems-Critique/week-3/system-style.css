@@ -224,7 +224,6 @@ button:hover {
     background-color: var(--footer-button-color);
     color: var(--primary-Color);
     border: none;
-    border-radius: 10%;
     margin: 10px;
 }
 

@@ -2,12 +2,12 @@
     --primary-Color: #FFFFFF;
     --secondary-Color: #e3e3e3;
     --utility-Color: #990F0F;
-
     --primary-Text-Color: #322f2f;
     --search-Color: #f2f2f2;
     --search-Border: #e3e3e3;
     --search-Text: #060606;
     --keyword-Text: #060606;
+    --bookmark-Text: #ff8222;
     --keywords-Background: #f2f2f2;
     --footer-button-color: #746e6e;
 }
@@ -46,10 +46,16 @@ button:hover {
     display: none;
     flex-direction: column;
     position: absolute;
-    width: 200px;
+    width: 150px;
     /* Made it a bit wider */
     height: auto;
-    min-height: 75px;
+    min-height: 50px;
+
+    right: 5%;
+    top: calc(5% + 40px);
+
+    align-items: center;
+    justify-content: center;
 
     background-color: var(--primary-Color);
     border: 1px solid var(--search-Border);
@@ -95,6 +101,10 @@ button:hover {
 
 .keyword-block {
     color: var(--keyword-Text);
+}
+
+.listKeyword-block {
+    color: var(--bookmark-Text);
 }
 
 .browser-header {
@@ -163,18 +173,21 @@ button:hover {
 }
 
 .bookmarked {
-    background-color: var(--utility-Color);
+    background-color: var(--bookmark-Text);
 }
 
 /* list of bookmarks e.g. cooking, studying. will display when you click bookmark button */
 .bookmarks-container {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    width: 200px;
-    /* Made it a bit wider */
     height: auto;
     min-height: 75px;
+    width: 200px;
+
+    display: none;
+    flex-direction: column;
+
+    position: absolute;
+    top: 65px;
+    right: 0px;
 
     background-color: var(--primary-Color);
     border: 1px solid var(--search-Border);
@@ -182,6 +195,21 @@ button:hover {
     z-index: 100;
     /* Make sure it's on top */
     border-radius: 4px;
+
+}
+
+.lists-list-item {
+    width: 100px;
+    margin: 3px;
+
+    background-color: var(--secondary-Color);
+    border: none;
+
+}
+
+.bookmark-list-item {
+    width: 100px;
+    margin: 3px;
 }
 
 /* list of websites */
@@ -208,4 +236,5 @@ button:hover {
 .description-container {
     display: flex;
     flex-direction: row;
+    position: relative
 }

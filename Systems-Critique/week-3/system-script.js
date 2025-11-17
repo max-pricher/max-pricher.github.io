@@ -1,13 +1,32 @@
 // Global arrays
 let keywords = [];
 let blockWords = [];
+let listKeywords = [];
 
 function updateSearchResults() { // searching function
     let searchResults;
     if (keywords.includes("_all")) { // if the keywords array contains _all, make a copy of WEBSITES
         // make a copy of WEBSITES
         searchResults = [...WEBSITES]; // was originally just = WEBSITES, but JS is pass by reference
-    } else if (keywords.length > 0) { // if not _all and not empty
+    }
+    else if (listKeywords.length > 0) { // if list keywords exist
+        searchResults = []; // get blank array
+        const masterList = getBookmarks(); // get all lists
+
+        // itterate through every list keyword inputted
+        for (let listIndex = 0; listIndex < listKeywords.length; listIndex++) {
+            const currentListName = listKeywords[listIndex]; // get current list name
+            const currentList = masterList[currentListName]; // get current list object
+            // add every webstie from list to the search results
+            for (let websiteIndex = 0; websiteIndex < currentList.length; websiteIndex++) {
+                const currentWebsite = currentList[websiteIndex]; // get current website
+                if (!searchResults.includes(currentWebsite)) { // and isnt already in results
+                    searchResults.push(currentWebsite); // add index to results array
+                }
+            } // end of website check
+        }
+    }
+    else if (keywords.length > 0) { // if not _all and not empty
         searchResults = []; // get blank array
         getPossibleResults(searchResults); // populate array
     }
@@ -38,7 +57,30 @@ searchBar.addEventListener('keydown', (event) => { // listener for all keydowns,
             if (currentKeyword[0] == '-') // leading char is - ||block word
             {
                 let blockWord = currentKeyword.substring(1); // remove the leading character -
-                blockWords.push(blockWord); // push to blockWord array
+                if (!blockWords.includes(blockWord)) { // if block word isn't already in array
+                    blockWords.push(blockWord); // add to array
+                }
+            }
+            // https://www.geeksforgeeks.org/javascript/how-to-make-array-indexof-case-insensitive-in-javascript/
+
+            else if (currentKeyword[0] == '~') // leading char is ~ || search in list
+            {
+                let potentialName = currentKeyword.substring(1); // remove the leading character ~
+                const masterList = getBookmarks();
+
+                let listNames = Object.keys(masterList); // get every list name
+
+                // case insensitive search for list name
+                const actualName = listNames.find(name => name.toLowerCase() === potentialName);
+                if (actualName) // if the name exists
+                {
+                    if (!listKeywords.includes(actualName)) { // if list keyword isn't already in array
+                        listKeywords.push(actualName); // add to array
+                    }
+                }
+                else {
+                    alert("A list with that name does not exist");
+                }
             }
             else // not special term, treat as regular keyword
             {
@@ -215,18 +257,26 @@ function updateKeywordContainer() {
     keywordsContainer.innerHTML = ""; // clear render
 
     const keywordsLength = keywords.length;
+    const blockwordsLength = blockWords.length;
+    const listkeywordsLength = listKeywords.length;
 
-    for (let block = 0; block < keywordsLength + blockWords.length; block++) { // add all keywords
+    // each keyword in container is a block, this adds each block to container
+    for (let block = 0; block < keywordsLength + blockwordsLength + listkeywordsLength; block++) { // add all keywords
         const searchTerm = document.createElement('button'); // create button
         searchTerm.className = 'searchTerm-block'; // add class to button
 
         // populate with data
-        if (block < keywords.length) { // if were searching keywords
+        if (block < keywordsLength) { // if were searching keywords
             searchTerm.classList.add('keyword-block'); // add class to button
             searchTerm.textContent = keywords[block]; // add content to button
         }
+        else if (block < keywordsLength + listkeywordsLength) { // add list keywords
+            let listKeywordIndex = block - keywordsLength;
+            searchTerm.classList.add('listKeyword-block'); // add class to button
+            searchTerm.textContent = "~" + listKeywords[listKeywordIndex];
+        }
         else { // add block words
-            let blockWordIndex = block - keywordsLength;
+            let blockWordIndex = block - keywordsLength - listkeywordsLength;
             searchTerm.classList.add('blockWord-block'); // add class to button
             searchTerm.textContent = blockWords[blockWordIndex];
         }
@@ -240,6 +290,13 @@ function updateKeywordContainer() {
                 if (index > -1) {
                     keywords.splice(index, 1); // remove the block from the keywords array
                 }
+            }
+            if (searchTerm.classList.contains("listKeyword-block")) {
+                const index = listKeywords.indexOf(buttonText.substring(1));
+                if (index > -1) {
+                    listKeywords.splice(index, 1); // remove the block from the keywords array
+                }
+
             }
             else { // block word
                 const index = blockWords.indexOf(buttonText);
@@ -326,9 +383,8 @@ function displayBookmarks(button) { // function to display the container for the
     }
 
     // get button position and move container
-    const buttonPos = button.getBoundingClientRect(); // get position of button
-    bookmarksContainer.style.top = (buttonPos.bottom + window.scrollY) + 'px';
-    bookmarksContainer.style.left = (buttonPos.left + window.scrollX) + 'px';
+    const parentContainer = button.parentElement; // get position of button
+    parentContainer.appendChild(bookmarksContainer);
 
     // draw menu
     bookmarkListDiv.innerHTML = ""; // clear previous render
@@ -458,19 +514,14 @@ listButton.addEventListener('click', () => {
 
 function displayLists() { // function to display the container for bookmark list
     const listsContainer = document.getElementById('js-lists-container');
-    const listsContainerDiv = document.getElementById('js-lists-list');
+
+    listsContainer.innerHTML = ""; // clear previous render
 
     if (localStorage.getItem('dataConsent') !== 'true') { // if consent not given
         return; // user has not consented to data storage
     }
 
-    // get button position and move container
-    const buttonPos = listButton.getBoundingClientRect(); // get position of button
-    listsContainer.style.top = (buttonPos.bottom + window.scrollY) + 'px';
-    listsContainer.style.left = (buttonPos.left + window.scrollX) + 'px';
-
     // draw menu
-    listsContainerDiv.innerHTML = ""; // clear previous render
     const masterList = getBookmarks(); // get current master list
     const userLists = Object.keys(masterList); // get every list name
 
@@ -478,35 +529,22 @@ function displayLists() { // function to display the container for bookmark list
     userLists.forEach(listName => {
         // create button for each list
         const listItem = document.createElement('button');
-        listItem.className = 'bookmark-list-item';
+        listItem.className = 'lists-list-item';
         listItem.value = listName;
         listItem.textContent = listName;
 
         // Add a listener for each list's button
         listItem.addEventListener('click', () => {
-            displayList(listItem);
+            if (!listKeywords.includes(listName)) { // if list keyword isn't already in array
+                listKeywords.push(listName); // add to array
+            }
+            updateKeywordContainer();
+
+            listsContainer.style.display = 'none'; // close menu after selection
+            updateSearchResults();
+
         }); //end of listener
-        listsContainerDiv.appendChild(listItem);
+        listsContainer.appendChild(listItem);
     }); // end of lists list
     listsContainer.style.display = 'flex';
-}
-
-// add all list items to results, then update results
-function displayList(button) {
-    // clear keyword bar
-    keywords = [];
-    updateKeywordContainer();
-
-    // get bookmark list objects
-    const bookmarkList = getBookmarks();
-
-    listName = button.textContent;
-
-    list = bookmarkList[listName];
-    if (list) {
-        displayResults(list);
-    }
-    else {
-        console.error("couldnt find list:", listName);
-    }
 }

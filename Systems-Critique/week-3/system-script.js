@@ -508,8 +508,16 @@ window.addEventListener('load', () => {
 const listButton = document.getElementById('js-lists-button');
 
 listButton.addEventListener('click', () => {
-    // Make sub menu appear directly below
-    displayLists();
+    const listsContainer = document.getElementById('js-lists-container');
+
+    // Check if it is currently visible
+    if (listsContainer.style.display === 'flex') {
+        // If it's open, CLOSE IT
+        listsContainer.style.display = 'none';
+    } else {
+        // If it's closed, OPEN IT
+        displayLists();
+    }
 });
 
 function displayLists() { // function to display the container for bookmark list

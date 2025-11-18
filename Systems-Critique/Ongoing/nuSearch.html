@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nu Search</title>
+    <link rel="stylesheet" href="system-style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/tmh5tsm.css">
+</head>
+
+<body>
+    <header class="browser-header">
+        <button class="SEO-button" id="js-seo-button">SEO preferences</button>
+        <div class="preferences-container" id="js-preferences-container">
+        </div>
+
+        <button class="lists-button" id="js-lists-button">Lists</button>
+
+        <div class="lists-container" id="js-lists-container">
+        </div>
+
+        <h1 class="site-name">Nu Search</h1>
+        <h2 class="search-motto">Search simpler</h2>
+    </header>
+
+    <main>
+        <div class="keywords-container" id="js-keywords-container">
+
+
+        </div>
+
+        <div class="search-area">
+            <!-- stretch goal! change search placeholder with random sentences -->
+            <label for="main-search-bar" class="main-search-bar-label">Search</label>
+
+
+            <input id="main-search-bar" class="search-bar" type="search" placeholder=" Keyword + Enter"
+                aria-label="type anything, hit enter to add keyword to search list">
+        </div>
+
+        <div class="search-results" id="js-search-container">
+
+        </div>
+
+        <div class="reccomended-searches">
+        </div>
+
+        <div class="bookmarks-container" id="js-bookmarks-container">
+            <button aria-label="click to add a new list" class="add-list-button" id="js-add-list-button">+ Add
+                List</button>
+            <div class="bookmark-list" id="js-bookmark-lists">
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <label for="js-privacy-checkbox" id="js-save-preferences">Save my preferences</label>
+        <input type="checkbox" id="js-privacy-checkbox" class="browser-check-box">
+        <button id="js-delete-user-data" class="footer-button"
+            aria-label="Click to disable and delete all user data">Delete my data</button>
+
+        <h2>Submission note</h2>
+        <p>* use _all to search all websites</p>
+        <p>I chose to focus on "Search engine result prioritization" and made a keyword optimized search browser. Users
+            add all relevant keywords to their search and results will be sorted based on how many relevant keywords
+            they contain. Additionally you can use '~' to search a bookmark list or '-' to block a keyword. </p>
+
+        <!-- load websites before system script -->
+        <script src="website-list.js"></script>
+        <script src="system-script.js"></script>
+
+
+
+
+</body>
+
+</html>

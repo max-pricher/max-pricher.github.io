@@ -326,7 +326,7 @@ const createASCIIShift = (el, opts = {}) => {
             }
 
             // Generate scrambled text
-            el.innerHTML = genScrambledTxt(t); /// generate the scramble
+            el.innerHTML = genScrambledTxt(t); /// generate the scramble inside <span>
             animId = requestAnimationFrame(animate); /// not sure what this function does, may be from another library
         };
 

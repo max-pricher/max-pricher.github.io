@@ -19,6 +19,9 @@ img {
 
 body {
     background-color: var(--background-color);
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
 }
 
 body.dark-mode {
@@ -30,6 +33,11 @@ body.dark-mode {
 .global-header{ /* for 'header-container' and 'nav-bar' */
     background-color:var(--header-color);
     padding: 10px 20px;
+    position:sticky;
+    top:0;
+    left:0;
+    width: 100vw;
+    z-index: 1000;
 }
 
 .header-container

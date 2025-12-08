@@ -6,7 +6,10 @@ const STORAGE_KEYS = [
     'language',
     'lastSaveTime',
     'dataConsent',
+    'blogEntries'
 ];
+
+let blogEntries = [];
 
 function clearAllUserData() {
     // for every item in array, remove from localStorage
@@ -17,6 +20,9 @@ function clearAllUserData() {
 
 // Function to check and clear expired data
 function checkDataExpiration() {
+     if (localStorage.getItem('dataConsent') === 'false') {
+        return;
+    }
     const lastSaveTime = localStorage.getItem('lastSaveTime');
     const currentTime = Date.now();
     // if past expiration, clear all data and return true
@@ -59,7 +65,7 @@ if (resourceButton) {
 // --nav toggle--
 let info = false;
 const expandNav = document.querySelector('.nav-toggle');
-const details = document.querySelector('.nav-bar');
+const details = document.querySelector('.nav-menu');
 
 if (expandNav) {
     expandNav.addEventListener('click', showNav);
@@ -81,7 +87,6 @@ function showNav() {
 
 // --- blog filter ---
 const filterButtons = document.querySelectorAll('.blog-nav button');
-const blogPosts = document.querySelectorAll('.blog-grid > div');
 
 // Attach listeners to filter buttons
 filterButtons.forEach(button => {
@@ -92,7 +97,9 @@ filterButtons.forEach(button => {
 });
 
 function filterBlogs(category) {
-    blogPosts.forEach(post => {
+    const currentPosts = document.querySelectorAll('.blog-grid > div');
+
+    currentPosts.forEach(post => {
         if (category === 'All' || post.dataset.category === category) {
             post.style.display = 'block';
         } else {
@@ -151,9 +158,146 @@ if (startStoringButton) { // This conditional check will now succeed.
 }
 
 
+
+// Blog entry functions
+
+function loadSavedBlogs() { // get saved blogs from localStorage and sync with global array.
+    if (localStorage.getItem('dataConsent') === 'false') {
+        return [];
+    }
+    const savedBlogs = localStorage.getItem('blogEntries');
+    return savedBlogs ? JSON.parse(savedBlogs) : [];
+}
+
+function deleteBlogEntry(timestampId)
+{
+    if (!confirm("Are you sure you want to delete this post?"))
+    {
+        return;
+    }
+
+    // get saved blogs
+    let currentBlogs = loadSavedBlogs();
+
+    // remoove blog from array
+    currentBlogs = currentBlogs.filter(post => post.timestamp !== timestampId);
+    
+    // sync blogs
+    localStorage.setItem('blogEntries', JSON.stringify(currentBlogs));
+
+    // Re-render
+    displayBlogs();
+}
+
+function submitBlogEntry(newName, newEntry, newIdentity) { // turn the blog name and entry into an object
+
+    const currentBlogs = loadSavedBlogs();
+
+    const newPost = {
+        name: newName,
+        entry: newEntry,
+        identity: newIdentity,
+        timestamp: Date.now(),
+        isUserPost: true // for delete button
+    };
+
+    // push to front of array
+    currentBlogs.unshift(newPost);
+    // add to local storage
+    localStorage.setItem('blogEntries', JSON.stringify(currentBlogs));
+
+    displayBlogs();
+}
+function displayBlogs() { 
+    const blogGrid = document.getElementById('js-blog-grid');
+    // clear html
+    blogGrid.innerHTML = '';
+
+    // get blogs from local storage // may be empty
+    const userBlogs = loadSavedBlogs();
+
+    // combine userblogs and demo/starter blogs
+    const allBlogs = [...userBlogs, ...STARTER_BLOGS];
+
+
+    // for every blog
+        // create new blog element
+        // attach each element as a child
+        // attach to container element
+
+    allBlogs.forEach(post => {
+        const blogDiv = document.createElement('div');
+        blogDiv.classList.add('blog');
+        
+        // Add filtering
+        blogDiv.setAttribute('data-category', post.identity);
+        
+       // Format Date
+        const dateString = new Date(post.timestamp).toLocaleDateString();
+
+        // Add the Text Content
+        blogDiv.innerHTML = `
+            <h2>${post.name}'s Blog</h2>
+            <p style="font-size: 0.8rem; color: gray; margin-bottom: 5px;">
+                ${post.identity} • ${dateString}
+            </p>
+            <p>${post.entry}</p>
+        `;
+
+        // delete button logic
+        if (post.isUserPost) {
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = "(Delete Post)";
+            deleteButton.classList.add('delete-button'); // Applies CSS class
+            
+            // Attach Event Listener directly to this button
+            deleteButton.addEventListener('click', function() {
+                deleteBlogEntry(post.timestamp);
+            });
+
+            // Append button to the blog card
+            blogDiv.appendChild(deleteButton);
+        }
+
+        blogGrid.appendChild(blogDiv);
+    });
+}
+
+const blogButton = document.getElementById('js-blog-button');
+const nameEntry = document.getElementById('name-entry');
+const blogEntry = document.getElementById('blog-entry');
+const categoryEntry = document.getElementById('category-entry');
+
+blogButton.addEventListener('click', () => {
+    // get name, check if empty
+    let name = nameEntry.value.trim();
+    // get blog entry, check if empty
+    let entry = blogEntry.value.trim();
+    // Get dropdown value   
+    let category = categoryEntry.value;
+
+    if (!entry || !name  || !category) {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    // valid response, reset fields
+    nameEntry.value = "";
+    blogEntry.value = "";
+    categoryEntry.vale = 0;
+
+    // save the blog entry to localStorage
+    submitBlogEntry(name, entry, category);
+});
+
+
 window.addEventListener('load', function () {
     // 1. Load saved theme and check expiration
     applySavedTheme();
 
+    // 2. Load Saved blog entries // 
+    loadSavedBlogs();
 
+    // 3. Render blogs
+    displayBlogs();
 });

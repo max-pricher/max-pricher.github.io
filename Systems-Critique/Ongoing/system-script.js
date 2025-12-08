@@ -29,7 +29,6 @@ function updateSearchResults() { // searching function, grabs results based on k
         displayResults([]);
         return;
     }
-
     // my idea to optimize this was use an array to call functions, i looked it up and found this was a dynamic function or call()
     
 
@@ -41,6 +40,7 @@ function updateSearchResults() { // searching function, grabs results based on k
             // apply preference function here
             // e.g., if (preference === 'Relevancy') { applyRelevancy(searchResults); }
         }
+    }
 
 
 

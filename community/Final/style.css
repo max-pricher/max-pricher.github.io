@@ -159,49 +159,6 @@ body.dark-mode .nav-toggle {
     text-decoration: underline;
 }
 
-/* from medium, html/css only submenu */
-
-.submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: var(--secondary-color);
-    border-radius: 0 0 20px 20px;
-    padding: 10px;
-    width: 90%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-/* don't forget to set the relative position for the parent element of the sub menu */
-nav>ul>li {
-    position: relative;
-}
-
-/* sub menu is hidden by default, list within list */
-nav>ul ul {
-    position: absolute;
-    display: none;
-}
-
-/* make it visible on hover */
-nav>ul>li:hover>ul {
-    display: block;
-    list-style-type: none;
-    padding-left: 10px;
-}
-
-/* make it visible on focus, for screen readers and mobile */
-nav>ul>li:focus-within>ul {
-    display: block;
-}
-
-/* fix the weird font size issue with buttons in nav */
-nav .nav-bar li button {
-    font-size: inherit;
-    font-family: inherit;
-}
-
 /* grid stuff */
 .main-grid {
     justify-items: center;
@@ -211,11 +168,7 @@ nav .nav-bar li button {
 
 /* consolidated all the text styling for the grid items, uses less lines and keeps code cleaner*/
 .home,
-.identity,
-.crisis,
-.sex-ed,
-.events,
-.contact {
+.identity {
     text-align: center;
     font-size: x-large;
 }
@@ -240,48 +193,6 @@ nav .nav-bar li button {
     width:1000px;
     height:auto;
 }
-
-.crisis {
-    grid-area: crisis;
-}
-
-.crisis-photo {
-    grid-area: crisis-photo;
-    width:500px;
-    height:333px;
-}
-
-.sex-ed {
-    grid-area: sex-ed;
-}
-
-.sex-ed-photo {
-    grid-area: sex-ed-photo;
-    width:1000px;
-    height:auto;
-}
-
-.events {
-    grid-area: events;
-}
-
-.events-photo {
-    grid-area: events-photo;
-     width:500px;
-    height:333px;
-}
-
-.contact {
-    grid-area: contact;
-}
-
-.contact-photo {
-    grid-area: contact-photo;
-    width:1000px;
-    height:auto;
-    
-}
-
 
 /* blog stuff */
 .blog-header
@@ -440,6 +351,24 @@ footer {
     font-family: inherit;
 }
 
+.privacy-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--utility-color); /* Match buttons */
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: var(--text-color-light);
+}
+
+/* Specific Checkbox styling */
+.check-box {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--secondary-color); /* Makes the checkmark orange/secondary color */
+}
+
 
 body.dark-mode .footer-button {
     color: var(--text-color-dark);
@@ -521,16 +450,12 @@ body.dark-mode #theme-toggle {
     }
 
     
-    .main-grid {
+    .main-grid { /* need to completley change */
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         /* odd number for mid point and symetry */
         grid-template-areas: "home home home home-photo home-photo"
-            "identity-photo identity-photo identity-photo identity identity"
-            "crisis crisis crisis crisis-photo crisis-photo"
-            "sex-ed-photo sex-ed-photo sex-ed-photo sex-ed sex-ed"
-            "events events events events-photo events-photo"
-            "contact-photo contact-photo contact-photo contact contact";
+            "identity-photo identity-photo identity-photo identity identity";
         justify-items: center;
         gap: 20px;
         padding: 20px;

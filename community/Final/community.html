@@ -19,16 +19,6 @@
         <nav class="nav-bar-container">
             <ul class="nav-bar" aria-label="Website Navigation Menu">
                 <li><a href="community.html">Home</a></li>
-
-                <!-- found this from a medium article by Bogdan Bendziukov -->
-                <li><button class="nav-button" id="Nav-Button" aria-haspopup="true"
-                        aria-expanded="false">Resources</button>
-                    <ul class="submenu">
-                        <li><a href="community.html#Identity">Identity</a></li>
-                        <li><a href="community.html#Crisis">Crisis</a></li>
-                        <li><a href="community.html#SexEd">Sex Ed</a></li>
-                    </ul>
-                </li>
                 <li><a href="community.html#Events">Events</a></li>
                 <li><a href="community.html#Contact">Contact</a></li>
                 <li><a href="blog.html">Blog</a></li>
@@ -52,86 +42,33 @@
                     Welcome to the Colorado Queer Sexual Health Hub.</p>
             </div>
 
-            <img src=""
-                alt="welcome-image" class="welcome-photo">
+            <img src="long-photo.webp" alt="welcome-image" class="welcome-photo">
 
             <div class="intro">
                 <h3 id="intro" class ="header-bold">Clean & Simple, Sexual Health.</h3>
-               <p>
-            We believe there's a big information gap in traditional Sex-Ed, which often centers exclusively on heterosexual experiences. 
-            We want to help close this gap and offer a <strong>Free</strong> and <strong>Comprehensive</strong> community resource for Boulder's queer youth.
-        </p>
+                <p>
+                We believe there's a big information gap in traditional Sex-Ed, which often centers exclusively on heterosexual experiences. 
+                We want to help close this gap and offer a <strong>Free</strong> and <strong>Comprehensive</strong> community resource for Boulder's queer youth.
+                </p>
             </div>
-
-            <img src="long-photo.webp" alt="girl and grandpa smiling"
-                class="identity-photo">
-
-            <div class="crisis">
-                <h3 id="Crisis" class ="header">Crisis</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo consequat.</p>
-            </div>
-
-            <img src="https://www.thetrevorproject.org/wp-content/uploads/2021/10/TTP_SupportiveAdult_Tom-Skyler1.JPG-720x479.jpg"
-                alt="girl and grandpa smiling" class="crisis-photo">
-
-            <div class="sex-ed">
-                <h3 id="SexEd" class ="header">Sex-Ed</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo consequat.</p>
-            </div>
-
-            <img src="long-photo.webp" alt="girl and grandpa smiling"
-                alt="girl and grandpa smiling"  class="sex-ed-photo">
-
-            <div class="events">
-                <h3 id="Events" class ="header">Events</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo consequat.</p>
-            </div>
-
-            <img src="https://www.thetrevorproject.org/wp-content/uploads/2021/10/TTP_SupportiveAdult_Tom-Skyler1.JPG-720x479.jpg"
-                alt="girl and grandpa smiling" class="events-photo">
-
-            <div class="contact">
-                <h3 id="Contact" class ="header"s>Contact</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo consequat.</p>
-            </div>
-            <img src="long-photo.webp" alt="girl and grandpa smiling" 
-                alt="girl and grandpa smiling" class="contact-photo">
-
         </div>
     </main>
 
     <!-- expand later  -->
-    <footer>
-        <p>&copy; 2025 Max Pricher's Project</p>
-        <a class="footer-button" id="back-to-top" aria-label="Back to top" href="#top">Back to Top</a>
-         <button class ="footer-button" id="theme-toggle" aria-label="Toggle dark and light themes">
-            Change Theme
-        </button>
-        <button class="footer-button" id="clear-data" aria-label="Remove my data">Remove my data</button>
-        <button class="footer-button" id="dont-store-data" aria-label="Don't store my data">Don't store my
-            data</button>
-        <button class="footer-button" id="start-storing-data" aria-label="Start saving my data">Start Saving
-            Data</button>
+   <footer>
+    <p>&copy; 2025 Max Pricher's Project</p>
+
+        <div class="footer-button-container">
+            
+            <div class="privacy-toggle-wrapper">
+                <input type="checkbox" id="js-privacy-checkbox" class="check-box">
+                <label for="js-privacy-checkbox" id="js-save-preferences">Save my preferences</label>
+            </div>
+
+            <button class="footer-button" id="theme-toggle">Change Theme</button>
+            <button class="footer-button" id="clear-data">Clear Data</button>
+            <a class="footer-button" id="back-to-top" href="#top">Back to Top</a>
+        </div>
     </footer>
 
     <script src="script.js"></script>

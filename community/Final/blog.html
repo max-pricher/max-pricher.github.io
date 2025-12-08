@@ -19,16 +19,6 @@
             <nav class="nav-bar-container">
                 <ul class="nav-bar" aria-label="Website Navigation Menu">
                     <li><a href="community.html">Home</a></li>
-
-                    <!-- found this from a medium article by Bogdan Bendziukov -->
-                    <li><button class="nav-button" id="Nav-Button" aria-haspopup="true"
-                            aria-expanded="false">Resources</button>
-                        <ul class="submenu">
-                            <li><a href="community.html#Identity">Identity</a></li>
-                            <li><a href="community.html#Crisis">Crisis</a></li>
-                            <li><a href="community.html#SexEd">Sex Ed</a></li>
-                        </ul>
-                    </li>
                     <li><a href="community.html#Events">Events</a></li>
                     <li><a href="community.html#Contact">Contact</a></li>
                     <li><a href="blog.html">Blog</a></li>
@@ -81,14 +71,18 @@
         </div>
     </main>
     <footer>
-        <p>&copy; 2025 Max Pricher's Project</p>
+    <p>&copy; 2025 Max Pricher's Project</p>
 
-        <div class = "footer-button-container">
-            <a class="footer-button" id="back-to-top" aria-label="Back to top" href="#top">Back to Top</a>
-            <button class ="footer-button" id="theme-toggle" aria-label="Toggle dark and light themes">Change Theme</button>
-            <button class="footer-button" id="clear-data" aria-label="Remove my data">Remove my data</button>
-            <button class="footer-button" id="dont-store-data" aria-label="Don't store my data">Don't store my data</button>
-            <button class="footer-button" id="start-storing-data" aria-label="Start saving my data">Start Saving Data</button>
+        <div class="footer-button-container">
+            
+            <div class="privacy-toggle-wrapper">
+                <input type="checkbox" id="js-privacy-checkbox" class="browser-check-box">
+                <label for="js-privacy-checkbox" id="js-save-preferences">Save my preferences</label>
+            </div>
+
+            <button class="footer-button" id="theme-toggle">Change Theme</button>
+            <button class="footer-button" id="clear-data">Clear Data</button>
+            <a class="footer-button" id="back-to-top" href="#top">Back to Top</a>
         </div>
     </footer>
     <script src="demo-blog-entries.js"></script>

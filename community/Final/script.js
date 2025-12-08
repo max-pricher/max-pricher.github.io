@@ -65,20 +65,20 @@ if (resourceButton) {
 // --nav toggle--
 let info = false;
 const expandNav = document.querySelector('.nav-toggle');
-const details = document.querySelector('.nav-menu');
+const navContainer = document.querySelector('.nav-bar-container');
 
-if (expandNav) {
+if (expandNav && navContainer) {
     expandNav.addEventListener('click', showNav);
 }
 
 function showNav() {
     if (info == false) {
-        details.classList.add('show');
+        navContainer.classList.add('show');
         expandNav.ariaLabel = "Collapse nav";
         info = true;
         expandNav.style.transform = "rotate(90deg)";
     } else {
-        details.classList.remove('show');
+        navContainer.classList.remove('show');
         expandNav.ariaLabel = "Expand nav";
         info = false;
         expandNav.style.transform = "rotate(0deg)";
@@ -284,7 +284,7 @@ blogButton.addEventListener('click', () => {
     // valid response, reset fields
     nameEntry.value = "";
     blogEntry.value = "";
-    categoryEntry.vale = 0;
+    categoryEntry.selectedIndex = 0;
 
     // save the blog entry to localStorage
     submitBlogEntry(name, entry, category);

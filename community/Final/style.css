@@ -471,23 +471,19 @@ body.dark-mode #theme-toggle {
     }
 
     .nav-bar-container{
-        display:flex;
+        display:none;
         grid-column: 1/-1; /* span from end to end */
         grid-row:2;
     }
 
     .nav-bar {
-        display: none;
         width: 90%;
-        margin-top: 40px;
-        /* lower the menu below toggle button */
+        margin-top: 20px;
+        gap: 15px;
     }
 
-    .nav-bar.show {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-
+    .nav-bar-container.show {
+        display: flex; /* This turns the lights on! */
     }
 
     .main-grid {

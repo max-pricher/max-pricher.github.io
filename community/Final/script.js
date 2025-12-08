@@ -127,37 +127,59 @@ if (themeButton) {
 
 
 // --- data buttons DEFINITIONS ---
+
+const privacyCheckbox = document.getElementById('js-privacy-checkbox');
 const clearButton = document.getElementById('clear-data');
+
+//  Initialize Checkbox on Page Load
+function initPrivacySettings() {
+    if (!privacyCheckbox) return;
+
+    const currentConsent = localStorage.getItem('dataConsent');
+    console.log("Current Data Consent:", currentConsent); // Debug log
+
+    if (currentConsent === 'true') {
+        privacyCheckbox.checked = true;
+    } else {
+        privacyCheckbox.checked = false;
+    }
+}
+
+// Toggle Logic
+if (privacyCheckbox) {
+    privacyCheckbox.addEventListener('change', () => {
+        if (privacyCheckbox.checked) {
+            // User checked the box // Enable
+            localStorage.setItem('dataConsent', 'true');
+            localStorage.setItem('lastSaveTime', Date.now());
+        } else {
+            // User unchecked the box // ask to clear
+            if(confirm("Unchecking this will disable storage and clear your saved data. Continue?")) {
+                clearAllUserData();
+                localStorage.setItem('dataConsent', 'false'); 
+                console.log("Data cleared and storage disabled.");
+                location.reload(); // Refresh to show clean state
+            } else {
+                // If they cancel, re-check the box visually
+                privacyCheckbox.checked = true;
+            }
+        }
+    });
+}
+
 if (clearButton) {
     clearButton.addEventListener('click', () => {
-        console.log("Clearing all user data.");
-        clearAllUserData();
+        if(confirm("This will wipe all your saved blog posts and theme settings. Are you sure?")) {
+            clearAllUserData();
+
+            if(privacyCheckbox.checked) {
+                 localStorage.setItem('dataConsent', 'true'); // re-initialize consent
+            }
+            console.log("User data wiped manually.");
+            location.reload();
+        }
     });
 }
-
-const dontStoreDataButton = document.getElementById('dont-store-data');
-if (dontStoreDataButton) {
-    dontStoreDataButton.addEventListener('click', () => {
-        // Clear data and set the opt-out flag
-        clearAllUserData();
-        // set flag to false
-        console.log("Opted out of data storage.");
-        localStorage.setItem('dataConsent', 'false');
-        localStorage.setItem('lastSaveTime', Date.now());
-    });
-}
-
-const startStoringButton = document.getElementById('start-storing-data');
-if (startStoringButton) { // This conditional check will now succeed.
-    startStoringButton.addEventListener('click', () => {
-        // change flag to true
-        localStorage.setItem('dataConsent', 'true');
-        localStorage.setItem('lastSaveTime', Date.now());
-        console.log("Opt-out reversed.");
-    });
-}
-
-
 
 // Blog entry functions
 
@@ -237,7 +259,7 @@ function displayBlogs() {
 
         // Add the Text Content
         blogDiv.innerHTML = `
-            <h2>${post.name}'s Blog</h2>
+            <h2 class ="header">${post.name}'s Blog</h2>
             <p style="font-size: 0.8rem; color: gray; margin-bottom: 5px;">
                 ${post.identity} • ${dateString}
             </p>
@@ -268,7 +290,9 @@ const nameEntry = document.getElementById('name-entry');
 const blogEntry = document.getElementById('blog-entry');
 const categoryEntry = document.getElementById('category-entry');
 
-blogButton.addEventListener('click', () => {
+if (blogButton)
+{
+    blogButton.addEventListener('click', () => {
     // get name, check if empty
     let name = nameEntry.value.trim();
     // get blog entry, check if empty
@@ -290,14 +314,20 @@ blogButton.addEventListener('click', () => {
     submitBlogEntry(name, entry, category);
 });
 
+}
+
+
 
 window.addEventListener('load', function () {
-    // 1. Load saved theme and check expiration
+
+    initPrivacySettings(); // load and visualize settings
+
+    //  Load saved theme and check expiration
     applySavedTheme();
 
-    // 2. Load Saved blog entries // 
+    //  Load Saved blog entries // 
     loadSavedBlogs();
 
-    // 3. Render blogs
+    //  Render blogs
     displayBlogs();
 });

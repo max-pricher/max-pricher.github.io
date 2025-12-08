@@ -22,9 +22,27 @@ body {
     margin:0;
     padding:0;
     box-sizing: border-box;
+
+    font-family: "nirmala-ui", sans-serif;
 }
 
 p {
+    font-family: "nirmala-ui", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.subtext {
+    font-family: "nirmala-ui", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.entry-field, button{
+    font-family: inherit;
+}
+
+button {
     font-family: "nirmala-ui", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -114,7 +132,7 @@ body.dark-mode {
 }
 
 nav a { /* text within nav bar */
-    color: var(--text-color-light);
+    color: var(--text-color-dark);
     text-decoration: none;
 }
 
@@ -292,6 +310,7 @@ body.dark-mode .nav-toggle {
     font-weight: bold;
     font-size: 1.1rem;
     color: var(--text-color-dark);
+    margin:auto;
 }
 
 .blog-nav {
@@ -312,7 +331,7 @@ body.dark-mode .nav-toggle {
 }
 
 .blog-button {
-    color: var(--text-color-light);
+    color: var(--text-color-dark);
     background: none;
     border: none;
     cursor: pointer;

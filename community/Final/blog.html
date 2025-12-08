@@ -34,11 +34,11 @@
     </header>
 
     <main>
-        <h1 class="blog-header">Community Voices</h1>
+        <h1 class="blog-header header">Community Voices</h1>
 
          <!-- filters for the blogs-->
         <nav class="blog-nav" aria-label="Blog Content Filters">
-            <h2 class="filter-label">Filter by Identity:</h2>
+            <h2 class="filter-label header">Filter by Identity:</h2>
             <button data-filter="All" class="blog-button">All</button>
             <button data-filter="Male" class="blog-button">Male</button>
             <button data-filter="Female" class="blog-button">Female</button>
@@ -49,9 +49,9 @@
 
         <div class="blog-entry-container">
     <div class="entry-row">
-        <input class="entry-field" id="name-entry" type="text" placeholder="Name or Alias">
+        <input class="entry-field subtext" id="name-entry" type="text" placeholder="Name or Alias">
         
-        <select class="entry-field" id="category-entry">
+        <select class="entry-field subtext" id="category-entry">
             <option value="disabled selected">Select Identity...</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -60,7 +60,7 @@
         </select>
     </div>
 
-    <textarea class="entry-field" id="blog-entry" rows="3" placeholder="Share your story..."></textarea>
+    <textarea class="entry-field subtext" id="blog-entry" rows="3" placeholder="Share your story..."></textarea>
     
     <button id="js-blog-button" class="blog-button">Submit Story</button>
 </div>

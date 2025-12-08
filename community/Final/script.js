@@ -59,7 +59,7 @@ if (resourceButton) {
 // --nav toggle--
 let info = false;
 const expandNav = document.querySelector('.nav-toggle');
-const details = document.querySelector('.nav-menu');
+const details = document.querySelector('.nav-bar');
 
 if (expandNav) {
     expandNav.addEventListener('click', showNav);

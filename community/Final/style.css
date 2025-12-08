@@ -1,7 +1,8 @@
 :root {
-    --primary-color: #DBFCFF;
+    --header-color: #CFB87C;
+    --background-color:white;
     --primary-dark-mode: #121212;
-    --secondary-color: #CC3D00;
+    --secondary-color: #A2A4A3;
     --text-color-light: #ffffff;
     --text-color-dark: #000000;
     --utility-color: #157145;
@@ -17,7 +18,7 @@ img {
 }
 
 body {
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
 }
 
 body.dark-mode {
@@ -25,14 +26,62 @@ body.dark-mode {
     color: var(--text-color-light);
 }
 
-
-/* nav stuff */
-.nav-brand {
-    font-size: xx-large;
-    text-align: center;
+/* header */
+.global-header{ /* for 'header-container' and 'nav-bar' */
+    background-color:var(--header-color);
+    padding: 10px 20px;
 }
 
-nav a {
+.header-container
+{
+    display: grid;
+    grid-template-columns: 1fr auto; /* default for desktop */
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+}
+
+/* nav stuff */
+
+.nav-bar-container{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    width: 100%;
+}
+
+.nav-bar {
+    grid-row:1;
+    grid-column: 1;
+    background: var(--secondary-color);
+    /* removes the bullet points */
+    list-style-type: none;
+    display: flex;
+
+    /* replaced our  font-size: 3vw; so it works on all screen sizes */
+    font-size: clamp(1rem, 3vw, 2rem);
+
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px clamp(10px, 2vw, 20px);
+    gap: clamp(10px, 2vw, 20px); /* swithced to using clamp so it doesnt cut off text, dyanmic gaps with font size*/
+    max-width: 3000px;
+    height: 70px;
+    border-radius: 20px;
+}
+
+.nav-brand {
+    grid-column: 1; /* on dektop, default should be to the left of the nav bar */
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color-dark);
+    margin:auto;
+}
+
+nav a { /* text within nav bar */
     color: var(--text-color-light);
     text-decoration: none;
 }
@@ -41,36 +90,15 @@ nav a:hover {
     text-decoration: underline;
 }
 
-.nav-menu {
-    background: var(--secondary-color);
-    /* removes the bullet points */
-    list-style-type: none;
-    display: flex;
-    top: 10px;
-
-    /* replaced our  font-size: 3vw; so it works on all screen sizes */
-    font-size: clamp(1rem, 3vw, 2rem);
-
-
-    align-items: center;
-    margin: auto;
-    justify-content: center;
-
-    padding: 0;
-    gap: 20px;
-    max-width: 3000px;
-    height: 70px;
-    border-radius: 20px;
-}
-
 .nav-toggle {
+    grid-column: 2; /* should always be far right */
+    grid-row:1;
+    justify-self: end;
     background-color: var(--utility-color);
     display: none;
-    position: absolute;
-    top: 2px;
-    right: 10px;
-    border-radius: 25%;
-    padding: 24px 20px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    flex-shrink: 0;
 }
 
 body.dark-mode .nav-toggle {
@@ -137,8 +165,9 @@ nav>ul>li:focus-within>ul {
 }
 
 /* fix the weird font size issue with buttons in nav */
-nav .nav-menu li button {
+nav .nav-bar li button {
     font-size: inherit;
+    font-family: inherit;
 }
 
 /* grid stuff */
@@ -166,6 +195,8 @@ nav .nav-menu li button {
 
 .home-photo {
     grid-area: home-photo;
+    width:500px;
+    height:333px;
 }
 
 .identity {
@@ -174,6 +205,8 @@ nav .nav-menu li button {
 
 .identity-photo {
     grid-area: identity-photo;
+    width:1000px;
+    height:auto;
 }
 
 .crisis {
@@ -182,6 +215,8 @@ nav .nav-menu li button {
 
 .crisis-photo {
     grid-area: crisis-photo;
+    width:500px;
+    height:333px;
 }
 
 .sex-ed {
@@ -190,6 +225,8 @@ nav .nav-menu li button {
 
 .sex-ed-photo {
     grid-area: sex-ed-photo;
+    width:1000px;
+    height:auto;
 }
 
 .events {
@@ -198,6 +235,8 @@ nav .nav-menu li button {
 
 .events-photo {
     grid-area: events-photo;
+     width:500px;
+    height:333px;
 }
 
 .contact {
@@ -206,6 +245,9 @@ nav .nav-menu li button {
 
 .contact-photo {
     grid-area: contact-photo;
+    width:1000px;
+    height:auto;
+    
 }
 
 
@@ -288,21 +330,6 @@ body.dark-mode .footer-button {
     background-color: var(--utility-dark);
 }
 
-
-#theme-toggle {
-    color: var(--text-color-light);
-    background-color: var(--utility-color);
-    border: none;
-    cursor: pointer;
-    padding: 25px;
-    border-radius: 25%;
-    font-size: medium;
-    padding: 30px 20px;
-    position: absolute;
-    top: 5px;
-    left: 10px;
-}
-
 body.dark-mode #theme-toggle {
     color: var(--text-color-dark);
     background-color: var(--utility-dark);
@@ -311,9 +338,15 @@ body.dark-mode #theme-toggle {
 
 /* media queries */
 /* for mobile */
-@media (max-width: 450px) {
+@media (max-width: 1200px) {
 
     /* sizing for mobile */
+    .header-container{  
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows:auto auto;
+    }
+
 
     #theme-toggle {
         padding: 15px;
@@ -321,17 +354,25 @@ body.dark-mode #theme-toggle {
 
     .nav-toggle {
         display: block;
+        grid-column: 2;
+        grid-row:1;
         /* show the toggle button on mobile */
     }
 
-    .nav-menu {
+    .nav-bar-container{
+        display:flex;
+        grid-column: 1/-1; /* span from end to end */
+        grid-row:2;
+    }
+
+    .nav-bar {
         display: none;
         width: 90%;
         margin-top: 40px;
         /* lower the menu below toggle button */
     }
 
-    .nav-menu.show {
+    .nav-bar.show {
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -339,48 +380,20 @@ body.dark-mode #theme-toggle {
     }
 
     .main-grid {
-        display: flex-column;
-        justify-content: center;
-    }
-
-
-}
-
-/* for tablets */
-@media (450px <=width <=1200px) {
-    .main-grid {
-        display: flex-column;
-        justify-content: center;
-    }
-
-    /* sizing for mobile */
-    .nav-toggle {
-        display: block;
-        /* show the toggle button on mobile */
-    }
-
-    .nav-menu {
-        display: none;
-        width: 100%;
-        margin-top: 40px;
-        /* lower the menu below toggle button */
-    }
-
-    .nav-menu.show {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    .blog-nav {
-        width: 500px;
-    }
+
 }
 
 /* for computer screens */
 @media (width >=1200px) {
 
 
-    .nav-menu {
-        /* dont need a nav-menu.show for desktop as it should always be shown */
+    .nav-bar {
+        /* dont need a nav-bar.show for desktop as it should always be shown */
         display: grid;
         grid-template-columns: repeat(5, auto);
         width: 800px;
@@ -391,6 +404,7 @@ body.dark-mode #theme-toggle {
         width: 600px;
     }
 
+    
     .main-grid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

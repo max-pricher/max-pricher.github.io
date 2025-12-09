@@ -1,31 +1,31 @@
 const STARTER_BLOGS = [
     {
         "name": "Max",
-        "entry": "The existential crisis of breakfast pastries often leads me to question the very fabric of reality. If a waffle is merely a grid of batter, is the syrup not a metaphor for societal expectations?",
+        "entry": "Sexual health is super important, im glad the Boulder Comunity has put together these resources.",
         "identity": "Non-Binary",
         "timestamp": 1701234567890 
     },
     {
         "name": "Erica",
-        "entry": "I have concluded, after three weeks of meticulous observation, that dust bunnies are organized into complex, highly political factions.",
+        "entry": "Finally found a place that lists actual queer-friendly testing sites without the judgment. It makes such a difference knowing where to go.",
         "identity": "Female",
         "timestamp": 1701234567891
     },
     {
         "name": "Bob",
-        "entry": "This is my blog page. I will post updates and articles here.",
+        "entry": "The info on PrEP here is clearer than what my doctor gave me. Really appreciate having all these local resources in one spot.",
         "identity": "Male",
         "timestamp": 1701234567892
     },
     {
         "name": "Tian",
-        "entry": "I feel strongly that hands have been marginalized in the world of cozy accessories. Feet get all the praise. But consider the tactical advantage of a fuzzy sock on a cold finger.",
+        "entry": "Love that this space exists! It's so hard to find accurate info on barrier methods that isn't just focused on cis-hetero couples.",
         "identity": "Female",
         "timestamp": 1701234567893
     },
     {
         "name": "Maeryn",
-        "entry": "The green light is not permission; it is a suggestion, often delivered with unwarranted enthusiasm. The yellow light, however, is a profound statement on time and human anxiety.",
+        "entry": "Checking in to say the crisis links are a lifesaver. Thank you for including mental health support alongside the physical health stuff.",
         "identity": "Non-Binary",
         "timestamp": 1701234567894
     }

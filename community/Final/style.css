@@ -2,12 +2,13 @@
     --header-color: #CFB87C;
     --background-color:white;
     --primary-dark-mode: #121212;
-    --secondary-color: #A2A4A3;
+    --secondary-color: #7F534B;
     --text-color-light: #ffffff;
     --text-color-dark: #000000;
     --utility-color: #157145;
     --utility-dark: #dbfcff;
 }
+/* element defaults */
 
 img {
     max-width: 100%;
@@ -32,17 +33,8 @@ p {
     font-style: normal;
 }
 
+/* font shortcuts */
 .subtext {
-    font-family: "nirmala-ui", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.entry-field, button{
-    font-family: inherit;
-}
-
-button {
     font-family: "nirmala-ui", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -61,15 +53,41 @@ button {
     font-style: normal;
 }
 
+/* font settings */
+.entry-field, button{
+    font-family: inherit;
+}
+
+button {
+    font-family: "nirmala-ui", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Dark modes */
 body.dark-mode {
     background-color: var(--primary-dark-mode);
     color: var(--text-color-light);
 }
 
+body.dark-mode .nav-toggle {
+    background-color: var(--utility-dark);
+}
+
+body.dark-mode .footer-button {
+    color: var(--text-color-dark);
+    background-color: var(--utility-dark);
+}
+
+body.dark-mode #theme-toggle {
+    color: var(--text-color-dark);
+    background-color: var(--utility-dark);
+}
+
 /* header */
 .global-header{ /* for 'header-container' and 'nav-bar' */
     background-color:var(--header-color);
-   padding: 10px 20px 0 20px;
+    padding: 0px 20px 0 20px;
     position:sticky;
     top:0;
     left:0;
@@ -86,7 +104,6 @@ body.dark-mode {
 }
 
 /* nav stuff */
-
 .nav-bar-container{
     display:flex;
     align-items: center;
@@ -105,7 +122,6 @@ body.dark-mode {
     /* replaced our  font-size: 3vw; so it works on all screen sizes */
     font-size: clamp(1rem, 3vw, 2rem);
 
-
     align-items: center;
     justify-content: center;
 
@@ -114,7 +130,7 @@ body.dark-mode {
     max-width: 3000px;
     height: 60px;
     border-radius: 20px;
-}
+} 
 
 .nav-brand {
     grid-column: 1; /* on dektop, default should be to the left of the nav bar */
@@ -132,7 +148,7 @@ body.dark-mode {
 }
 
 nav a { /* text within nav bar */
-    color: var(--text-color-dark);
+    color: var(--text-color-light);
     text-decoration: none;
 }
 
@@ -140,7 +156,7 @@ nav a:hover {
     text-decoration: underline;
 }
 
-.nav-toggle {
+.nav-toggle { /*  should only appear on mobile*/
     grid-column: 2; /* should always be far right */
     grid-row:1;
     justify-self: end;
@@ -149,10 +165,6 @@ nav a:hover {
     border-radius: 10px;
     padding: 15px 15px;
     flex-shrink: 0;
-}
-
-body.dark-mode .nav-toggle {
-    background-color: var(--utility-dark);
 }
 
 /* for hamburger menu */
@@ -177,46 +189,34 @@ body.dark-mode .nav-toggle {
     text-decoration: underline;
 }
 
-/* grid stuff */
+/* layout stuff */
 .main-grid {
+    display:flex;
+    flex-direction: column;
     justify-items: center;
     gap: 20px;
     padding: 20px;
 }
+.welcome-photo
+{
+    width: 90%;
+}
 
-/* consolidated all the text styling for the grid items, uses less lines and keeps code cleaner*/
-.home,
-.identity {
+.home 
+{
     text-align: center;
-    font-size: x-large;
 }
 
-/* consolidated way of assigning grid areas, */
-.home {
-    grid-area: home;
-}
-
-.home-photo {
-    grid-area: home-photo;
-    width:500px;
-    height:333px;
-}
-
-.identity {
-    grid-area: identity;
-}
-
-.identity-photo {
-    grid-area: identity-photo;
-    width:1000px;
-    height:auto;
+.center
+{
+    text-align: center;
 }
 
 /* blog stuff */
 .blog-header
 {
     text-align:center;
-    margin:10px auto 0px auto;
+    margin:10px auto 10px auto;
 }
 
 /* blog entry stuff */
@@ -235,7 +235,7 @@ body.dark-mode .nav-toggle {
 .blog-entry-container {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 80%;
     max-width: 800px;
     margin: 20px auto 40px auto;
     padding: 20px;
@@ -316,28 +316,43 @@ body.dark-mode .nav-toggle {
 .blog-nav {
     display: flex;
     justify-content: center;
-    text-align: center;
-    font-size: clamp(1rem, 3vw, 2rem);
+    flex-wrap: wrap; /* Allows buttons to wrap on tiny screens */
+    align-items: center;
+    font-size: 1rem; 
+    
     border: 1px solid black;
     border-radius: 10px;
     background-color: var(--secondary-color);
    
-
-    width: 90%;
-    max-width: 1100px; 
+    width: fit-content; 
+    max-width: 90%; 
     margin: 0 auto 30px auto;
-    padding: 0 20px;
-    gap: 15px;
+    
+    padding: 10px; 
+    gap: 10px;
 }
 
 .blog-button {
     color: var(--text-color-dark);
     background: none;
-    border: none;
+    
+   
+    border: 2px solid transparent; 
+    border-radius: 5px; 
+    
     cursor: pointer;
-    font-size: large;
-    margin: 5px 5px;
-    padding: 12px 18px;
+    
+  
+    font-size: 1rem;
+    padding: 5px 15px;
+    
+    margin: 0; 
+    transition: all 0.2s ease; 
+}
+
+.blog-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--text-color-dark);
 }
 
 /* footer stuff */
@@ -380,6 +395,11 @@ footer {
     color: var(--text-color-light);
 }
 
+.footer-theme-button
+{
+    display:none;
+}
+
 /* Specific Checkbox styling */
 .check-box {
     width: 20px;
@@ -388,15 +408,20 @@ footer {
     accent-color: var(--secondary-color); /* Makes the checkmark orange/secondary color */
 }
 
-
-body.dark-mode .footer-button {
-    color: var(--text-color-dark);
-    background-color: var(--utility-dark);
+.home{
+    text-align: left;
+}
+.green{
+    color: var(--utility-color);
 }
 
-body.dark-mode #theme-toggle {
-    color: var(--text-color-dark);
-    background-color: var(--utility-dark);
+.home-header
+{
+    text-align: center;
+    font-family: "elizeth", serif;
+    font-weight: 400;
+    font-style: normal;
+
 }
 
 
@@ -416,6 +441,7 @@ body.dark-mode #theme-toggle {
         grid-column: 2;
         grid-row:1;
         /* show the toggle button on mobile */
+        align-self: center;
     }
 
     .nav-bar-container{
@@ -425,20 +451,29 @@ body.dark-mode #theme-toggle {
     }
 
     .nav-bar {
-        width: 90%;
+        width: 100%;
         margin-top: 20px;
-        gap: 15px;
+        gap:clamp(10px, 4vw, 40px);
     }
 
     .nav-bar-container.show {
-        display: flex; /* This turns the lights on! */
-    }
+    display: flex;
+    width: 100%;
+    padding: 0; /* Ensure no extra padding creates scroll */
+}
 
     .main-grid {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
+        flex-direction: row;
         justify-content: center;
     }
+
+    .welcome-photo
+    {
+        margin:auto;
+    }
+
 
     .blog-grid {
     display: grid;
@@ -447,6 +482,109 @@ body.dark-mode #theme-toggle {
 
     gap: 20px;
     padding: 20px;
+}
+
+/* Text Colors */
+.text-utility {
+    color: var(--utility-color);
+}
+
+/* Spacing Helpers */
+.mb-small {
+    margin-bottom: 10px;
+}
+
+.mb-medium {
+    margin-bottom: 20px;
+}
+
+/* Layout Helpers */
+.align-start {
+    align-items: start; /* Pulls grid items to the top */
+}
+
+.text-left {
+    text-align: left;
+}
+
+.full-width {
+    grid-column: 1 / -1; /* Spans entire grid width */
+    width: 100%;
+}
+
+/* --- PAGE SPECIFIC COMPONENTS --- */
+
+/* Page Titles */
+.page-title-container {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Resources Page: Protection Section */
+.protection-section {
+    grid-column: 1 / -1;
+    margin-top: 40px;
+    border-top: 2px solid var(--secondary-color);
+    padding-top: 20px;
+    width: 100%;
+}
+
+.card-grid {
+    display: grid;
+    /* Automatically fits cards of min 250px */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+.resource-card {
+    padding: 20px;
+    border: 1px solid var(--text-color-dark);
+    border-radius: 10px;
+    background-color: var(--background-color);
+}
+
+/* Contact Page: Forms & Sidebar */
+.contact-section {
+    text-align: left;
+    width: 100%;
+}
+
+.contact-button {
+    width: 100%; 
+    margin-top: 10px; 
+    background-color: var(--utility-color); 
+    color: white; 
+}
+
+.crisis-sidebar {
+    text-align: left;
+    background-color: var(--utility-dark);
+    padding: 30px;
+    border-radius: 20px;
+    color: var(--text-color-dark);
+}
+
+.crisis-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.crisis-item {
+    margin-bottom: 20px;
+}
+
+/* Links */
+.resource-link {
+    color: var(--utility-color);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.resource-link:visited {
+    color: var(--utility-color);
 }
 
 
@@ -470,11 +608,8 @@ body.dark-mode #theme-toggle {
 
     
     .main-grid { /* need to completley change */
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        /* odd number for mid point and symetry */
-        grid-template-areas: "home home home home-photo home-photo"
-            "identity-photo identity-photo identity-photo identity identity";
+        display: flex;
+        flex-direction: column;
         justify-items: center;
         gap: 20px;
         padding: 20px;

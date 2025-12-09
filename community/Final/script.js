@@ -325,9 +325,48 @@ window.addEventListener('load', function () {
     //  Load saved theme and check expiration
     applySavedTheme();
 
-    //  Load Saved blog entries // 
-    loadSavedBlogs();
-
-    //  Render blogs
-    displayBlogs();
+    //  Render blogs if on blog page
+    if (document.getElementById('js-blog-grid')) {
+        loadSavedBlogs();
+        displayBlogs();
+    }
 });
+
+
+
+
+// contact us box
+contactNameEntry = document.getElementById('contact-name-entry');
+contactEmailEntry = document.getElementById('contact-email-entry');
+contactSubjectEntry = document.getElementById('contact-subject-entry');
+contactTextEntry = document.getElementById('contact-text-entry');
+contactButton = document.getElementById('contact-button');
+
+if(contactButton)
+{
+    contactButton.addEventListener('click', () => {
+    // get name, check if empty
+    let name = contactNameEntry.value.trim();
+    // get blog entry, check if empty
+    let email = contactEmailEntry.value.trim();
+    // Get subject field   
+    let subject = contactSubjectEntry.value.trim();
+    // Get text value   
+    let text = contactSubjectEntry.value.trim();
+
+    if (!email || !name  || !subject || !text) {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    // valid response, reset fields
+    contactNameEntry.value = "";
+    contactEmailEntry.value = "";
+    contactSubjectEntry.value = "";
+    contactTextEntry.value = "";
+
+    alert("Message Sent"); // lol
+    });
+}
+
+

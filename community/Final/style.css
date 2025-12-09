@@ -437,6 +437,21 @@ footer {
     border-radius: 10px; 
 }
 
+.testing-image
+{
+
+    width: 100%;       
+    max-width: 400px;  
+    height: auto;
+    
+    display: block; 
+    
+   
+    margin: 0 0 20px 0;
+    
+    border-radius: 10px; 
+}
+
 
 /* media queries */
 /* for mobile */
@@ -457,7 +472,7 @@ footer {
     .blog-entry-container {
         width: 100%;
         max-width: 100%;
-        box-sizing: border-box; /* Removes extra side margins */
+        box-sizing: border-box;
     }
 
 
@@ -541,8 +556,6 @@ footer {
     grid-column: 1 / -1; /* Spans entire grid width */
     width: 100%;
 }
-
-/* --- PAGE SPECIFIC COMPONENTS --- */
 
 /* Page Titles */
 .page-title-container {

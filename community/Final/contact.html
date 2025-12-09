@@ -39,17 +39,17 @@
             <h1 class="header-bold">Get in Touch</h1>
             <p class="subtext">Have questions about the hub or want to suggest an event? Send us a message.</p>
             
-            <div class="blog-entry-container contact-form-wrapper">
+            <div class="blog-entry-container contact-form-wrapper" aria-label="Contact form">
                 <div class="entry-row">
-                    <input id = "contact-name-entry" class="entry-field subtext" type="text" placeholder="Your Name">
-                    <input id = "contact-email-entry"class="entry-field subtext" type="email" placeholder="Your Email">
+                    <input id = "contact-name-entry" class="entry-field subtext" type="text" placeholder="Your Name" aria-label="click to enter your name in this field">
+                    <input id = "contact-email-entry"class="entry-field subtext" type="email" placeholder="Your Email" aria-label="click to enter your email in this field">
                 </div>
                 
-                <input id="contact-subject-entry" class="entry-field subtext" type="text" placeholder="Subject">
+                <input id="contact-subject-entry" class="entry-field subtext" type="text" placeholder="Subject" aria-label="click to enter subject in field">
                 
-                <textarea id="contact-text-entry" class="entry-field subtext" rows="5" placeholder="How can we help?"></textarea>
+                <textarea id="contact-text-entry" class="entry-field subtext" rows="5" placeholder="How can we help?" aria-label="click to write your message in this field"></textarea>
                 
-                <button id = "contact-button" class="blog-button contact-button">Send Message</button>
+                <button id = "contact-button" class="blog-button contact-button" aria-label="click to send message">Send Message</button>
             </div>
         </div>
 
@@ -86,13 +86,13 @@
         <div class="footer-button-container">
             
             <div class="privacy-toggle-wrapper">
-                <input type="checkbox" id="js-privacy-checkbox" class="check-box">
+                <input type="checkbox" id="js-privacy-checkbox" class="check-box" aria-label="click to toggle preferences">
                 <label for="js-privacy-checkbox" id="js-save-preferences">Save my preferences</label>
             </div>
 
-            <button class="footer-button footer-theme-button" id="theme-toggle">Change Theme</button>
-            <button class="footer-button" id="clear-data">Clear Data</button>
-            <a class="footer-button" id="back-to-top" href="#top">Back to Top</a>
+            <button class="footer-button footer-theme-button" id="theme-toggle" aria-label="click to change theme">Change Theme</button>
+            <button class="footer-button" id="clear-data" aria-label="click to clear your user data">Clear Data</button>
+            <a class="footer-button" id="back-to-top" href="#top" aria-label="click to go back to top">Back to Top</a>
         </div>
     </footer>
 

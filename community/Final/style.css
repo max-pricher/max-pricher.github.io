@@ -309,7 +309,7 @@ nav a:hover {
 .filter-label {
     font-weight: bold;
     font-size: 1.1rem;
-    color: var(--text-color-dark);
+    color: var(--text-color-light);
     margin:auto;
 }
 
@@ -333,7 +333,7 @@ nav a:hover {
 }
 
 .blog-button {
-    color: var(--text-color-dark);
+    color: var(--text-color-light);
     background: none;
     
    

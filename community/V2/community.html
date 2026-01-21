@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trevors Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="top">
+
+    <header>
+        <nav class="main-nav">
+            <div class="nav-brand">Community Hub</div>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" aria-label="Website Navigation Menu">
+                <li><a href="community.html">Home</a></li>
+                <!-- found this from a medium article by Bogdan Bendziukov -->
+                <li><button class="nav-button" id="Nav-Button" aria-haspopup="true"
+                        aria-expanded="false">Resources</button>
+                    <ul class="submenu">
+                        <li><a href="community.html#Identity">Identity</a></li>
+                        <li><a href="community.html#Crisis">Crisis</a></li>
+                        <li><a href="community.html#SexEd">Sex Ed</a></li>
+                    </ul>
+                </li>
+                <li><a href="community.html#Events">Events</a></li>
+                <li><a href="community.html#Contact">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+
+        <button id="theme-toggle" aria-label="Toggle dark and light themes">
+            Change Theme
+        </button>
+
+    </header>
+    <main>
+        <div class="main-grid">
+            <div class="home">
+                <h2 id="Home">Home</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et
+                    dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit
+                    anim id est laborum.</p>
+            </div>
+
+            <img src="https://www.thetrevorproject.org/wp-content/uploads/2021/10/TTP_SupportiveAdult_Tom-Skyler1.JPG-720x479.jpg"
+                alt="girl and grandpa smiling" style="width:500px;height:333px;" class="home-photo">
+
+            <div class="identity">
+                <h3 id="Identity">Identity</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat.</p>
+            </div>
+
+            <img src="long-photo.webp" alt="girl and grandpa smiling" style="width:1000px;height:auto;"
+                class="identity-photo">
+
+            <div class="crisis">
+                <h3 id="Crisis">Crisis</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat.</p>
+            </div>
+
+            <img src="https://www.thetrevorproject.org/wp-content/uploads/2021/10/TTP_SupportiveAdult_Tom-Skyler1.JPG-720x479.jpg"
+                alt="girl and grandpa smiling" style="width:500px;height:333px;" class="crisis-photo">
+
+            <div class="sex-ed">
+                <h3 id="SexEd">Sex-Ed</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat.</p>
+            </div>
+
+            <img src="long-photo.webp" alt="girl and grandpa smiling" style="width:1000px;height:auto;"
+                alt="girl and grandpa smiling" style="width:1000px;height:auto;" class="sex-ed-photo">
+
+            <div class="events">
+                <h3 id="Events">Events</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat.</p>
+            </div>
+
+            <img src="https://www.thetrevorproject.org/wp-content/uploads/2021/10/TTP_SupportiveAdult_Tom-Skyler1.JPG-720x479.jpg"
+                alt="girl and grandpa smiling" style="width:500px;height:333px;" class="events-photo">
+
+            <div class="contact">
+                <h3 id="Contact">Contact</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat.</p>
+            </div>
+            <img src="long-photo.webp" alt="girl and grandpa smiling" style="width:1000px;height:auto;"
+                alt="girl and grandpa smiling" style="width:1000px;height:auto;" class="contact-photo">
+
+        </div>
+    </main>
+
+    <!-- expand later  -->
+    <footer>
+        <p>&copy; 2025 Trevor's Project</p>
+        <a class="footer-button" id="back-to-top" aria-label="Back to top" href="#top">Back to Top</a>
+        <button class="footer-button" id="clear-data" aria-label="Remove my data">Remove my data</button>
+        <button class="footer-button" id="dont-store-data" aria-label="Don't store my data">Don't store my
+            data</button>
+        <button class="footer-button" id="start-storing-data" aria-label="Start saving my data">Start Saving
+            Data</button>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
